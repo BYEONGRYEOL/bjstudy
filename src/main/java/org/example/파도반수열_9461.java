@@ -1,29 +1,30 @@
 package org.example;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class ATM_11399 {
-
+public class 파도반수열_9461 {
     static void input() throws Exception {
-        // 당연히 작업 시간이 짧은 사람부터 out되어야 한다.
-        int n = scan.nextInt();
-        int[] array = new int[n];
-        for(int i = 0 ; i<  n ; i++)
-            array[i] = scan.nextInt();
 
-        Arrays.sort(array); // 오름차순
+        // 초기값
+        // 인덱스     0 1 2 3 4
+        // 값        1 1 1 2 2
+        // 인덱스 5의 값 2는 0번째 index + 4번째 index를 합하여 나온 값이다.
+        long dp[] = new long[101];
+        dp[1] = 1;
+        dp[2] = 1;
+        dp[3] = 1;
+        dp[4] = 2;
+        dp[5] = 2;
 
-        int answer = 0;
-        int waitingTime = 0;
-        for(int i = 0 ; i < n ; i++){
-            waitingTime += array[i];
-            answer += waitingTime;
+        for(int i =  6;  i < 101; i++){
+            dp[i] = dp[i-5] + dp[i-1];
         }
-        System.out.println(answer);
+
+        int t = scan.nextInt();
+        for(int i = 0 ; i < t ; i ++)
+            sb.append(dp[scan.nextInt()]).append('\n');
+        print();
     }
 
     static void print(){

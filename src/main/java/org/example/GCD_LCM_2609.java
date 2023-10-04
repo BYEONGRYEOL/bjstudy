@@ -1,29 +1,25 @@
 package org.example;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class ATM_11399 {
-
+public class GCD_LCM_2609 {
+    static int GCD(int a, int b){
+        // 입력이 72, 54라면?
+        // 나눠지지 않으므로 54, 18에 대해서 재검사
+        return (a % b == 0) ? b : GCD(b, a%b);
+    }
+    static int LCM(int a, int b){
+        //최소공배수 = a * b / GCD(a,b)
+        // 왜냐면 a/GCD * b/GCD * GCD가 겹치는 인수들을 걸러내는 방법이므로
+        return a * b / GCD(a,b);
+    }
     static void input() throws Exception {
-        // 당연히 작업 시간이 짧은 사람부터 out되어야 한다.
-        int n = scan.nextInt();
-        int[] array = new int[n];
-        for(int i = 0 ; i<  n ; i++)
-            array[i] = scan.nextInt();
-
-        Arrays.sort(array); // 오름차순
-
-        int answer = 0;
-        int waitingTime = 0;
-        for(int i = 0 ; i < n ; i++){
-            waitingTime += array[i];
-            answer += waitingTime;
-        }
-        System.out.println(answer);
+        int a = scan.nextInt();
+        int b = scan.nextInt();
+        sb.append(GCD(a,b)).append('\n');
+        sb.append(LCM(a,b));
+        print();
     }
 
     static void print(){

@@ -3,27 +3,25 @@ package org.example;
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class ATM_11399 {
-
+public class 최소공배수_1934 {
+    // 인터넷 안보고 풀어보기!!!!
+    static int GCD(int a, int b){
+        // 입력이 72, 54라면?
+        // 나눠지지 않으므로 54, 18에 대해서 재검사
+        return (a % b == 0) ? b : GCD(b, a%b);
+    }
+    static int LCM(int a, int b){
+        //최소공배수 = a * b / GCD(a,b)
+        // 왜냐면 a/GCD * b/GCD * GCD가 겹치는 인수들을 걸러내는 방법이므로
+        return a * b / GCD(a,b);
+    }
     static void input() throws Exception {
-        // 당연히 작업 시간이 짧은 사람부터 out되어야 한다.
-        int n = scan.nextInt();
-        int[] array = new int[n];
-        for(int i = 0 ; i<  n ; i++)
-            array[i] = scan.nextInt();
-
-        Arrays.sort(array); // 오름차순
-
-        int answer = 0;
-        int waitingTime = 0;
-        for(int i = 0 ; i < n ; i++){
-            waitingTime += array[i];
-            answer += waitingTime;
+        int caseNum = scan.nextInt();
+        for(int z= 0 ; z < caseNum ; z++){
+            sb.append(LCM(scan.nextInt(), scan.nextInt())).append('\n');
         }
-        System.out.println(answer);
+        print();
     }
 
     static void print(){
