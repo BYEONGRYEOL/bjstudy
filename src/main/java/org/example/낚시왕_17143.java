@@ -1,30 +1,44 @@
 package org.example;
 
 import java.io.*;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class 파도반수열_9461 {
+public class 낚시왕_17143 {
+    static int R;
+    static int C;
+    static int X;
+    static int Y;
+    static int[] dirx = {-100,-1,1,0,0};
+    static int[] diry = {-100,0,0,-1,1};
     static void input() throws Exception {
+        R = scan.nextInt();
+        C = scan.nextInt();
+        int M = scan.nextInt();
+    }
+    class Shark{
+        int x;
+        int y;
+        int speed;
+        int dir; // 상하좌우 1,2,3,4
+        int value;
+        public Shark(int x, int y, int speed, int dir, int value){
+            this.x = x;
+            this.y = y;
+            this.speed = speed;
+            this.dir = dir;
+            this.value = value;
+        }
+        public int move(){
+            int newx = this.x + dirx[this.dir] * speed;
+            int newy = this.y + diry[this.dir] * speed;
+            // x = 10, R = 11, newx 14? -> x = R - newx;
+            newx = newx > R ? newx - R : newx;
+            newy = newy > R ? newy - R : newy;
 
-        // 초기값
-        // 인덱스     0 1 2 3 4
-        // 값        1 1 1 2 2
-        // 인덱스 5의 값 2는 0번째 index + 4번째 index를 합하여 나온 값이다.
-        long dp[] = new long[101];
-        dp[1] = 1;
-        dp[2] = 1;
-        dp[3] = 1;
-        dp[4] = 2;
-        dp[5] = 2;
-
-        for(int i =  6;  i < 101; i++){
-            dp[i] = dp[i-5] + dp[i-1];
         }
 
-        int t = scan.nextInt();
-        for(int i = 0 ; i < t ; i ++)
-            sb.append(dp[scan.nextInt()]).append('\n');
-        print();
     }
 
     static void print(){
