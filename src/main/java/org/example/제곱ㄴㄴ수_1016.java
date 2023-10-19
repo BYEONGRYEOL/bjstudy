@@ -5,40 +5,31 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class 낚시왕_17143 {
-    static int R;
-    static int C;
-    static int X;
-    static int Y;
-    static int[] dirx = {-100,-1,1,0,0};
-    static int[] diry = {-100,0,0,-1,1};
+public class 제곱ㄴㄴ수_1016 {
     static void input() throws Exception {
-        R = scan.nextInt();
-        C = scan.nextInt();
-        int M = scan.nextInt();
-    }
-    class Shark{
-        int x;
-        int y;
-        int speed;
-        int dir; // 상하좌우 1,2,3,4
-        int value;
-        public Shark(int x, int y, int speed, int dir, int value){
-            this.x = x;
-            this.y = y;
-            this.speed = speed;
-            this.dir = dir;
-            this.value = value;
-        }
-        public int move(){
-            int newx = this.x + dirx[this.dir] * speed;
-            int newy = this.y + diry[this.dir] * speed;
-            // x = 10, R = 11, newx 14? -> x = R - newx;
-            newx = newx > R ? newx - R : newx;
-            newy = newy > R ? newy - R : newy;
-            return 1;
-        }
 
+//        long min = scan.nextLong();
+//        long max = scan.nextLong();
+//
+//        boolean isSqaured[] = new boolean[(int)(max - min) + 1];
+//        long divisors[] = new long[1000001];
+//        for(long i = 2; i < 1000001; i++){
+//            divisors[i] =
+//        }
+//
+//        for(long num = min; num <= max; num++){
+//            if(isSqaured[(int)(num-min)] == false){
+//                for()
+//            }
+//        }
+        // 바꿔 말하면 어떤 정수 x가 소수들의 곱으로만 이루어져있는 것이기도 하다.
+        // 에라토스테네스의 체와 비슷한 원리로 시도해보자
+        // 검사할 수의 범위가 최대 1조 지만,
+        // 1조까지의 제곱수의 개수는 1000000개로 추정되고,
+        // 4의 배수를 검사한 이상 16의 배수는 검사할 필요가 없다.
+        // 9의 배수를 검사한 이후 81의 배수를 검사할 필요가 없다.
+
+        // 먼저 제곱수들
     }
 
     static void print(){
