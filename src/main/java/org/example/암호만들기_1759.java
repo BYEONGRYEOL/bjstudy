@@ -1,44 +1,46 @@
 package org.example;
 
 import java.io.*;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class 최솟값찾기_11003 {
+public class 암호만들기_1759 {
 
-
-    static void addData(Deque<int[]> deque, int[] data){
-        while(deque.isEmpty() == false && deque.peekLast()[0] > data[0]){
-            deque.pollLast();
+    static char[] s;
+    static int L;
+    static int C;
+    static char[] result;
+    static void dfs(int i, int depth){
+        if(depth == L){
+            if(checkValid())
+                sb.append(result).append('\n');
+            return;
         }
-        deque.addLast(data);
+        if(i == C)
+            return;
+        result[depth] = s[i];
+        dfs(i+1, depth+1);
+        dfs(i+1, depth);
+
     }
-    static void printMin(Deque<int[]> deque, int index, int l){
-        if(deque.peekFirst()[1] + l <= index)
-            deque.pollFirst();
-        sb.append(deque.peekFirst()[0]).append(' ');
+    static boolean checkValid(){
+        int vowelCount = 0;
+        for(int i = 0; i < L;i++){
+            if(result[i] == 'a'||result[i] == 'e'||result[i] == 'i'||result[i] == 'o'||result[i] == 'u'){
+                vowelCount++;
+            }
+        }
+        return vowelCount > 0 && L - vowelCount > 1;
     }
     static void input() throws Exception {
-        // 1 5 2 4 3 7
-        // 우선순위 큐를 사용하면 매 add함수에 log N 연산을 진행하다보니 불필요하게 정렬된다.
-        // 슬라이딩 윈도우를 사용하면 될 것 같은데 뭔가 애매한 경우이ㅏㅁ
-        // 뭐가 애매하냐면
-        // 검사를 진행하면서 r++, l++ 한칸씩 shift하면서 잘 간다.
-        // 현재 들고 있는 최솟값 min이 이제는 검사구역을 벗어나는 l의 값과 같다면?
-        // 다시 새롭게 윈도우 내의 최솟값을 찾는다??
+        ArrayList<Character> vowels = new ArrayList<>();
+        ArrayList<Character> consonents = new ArrayList<>();
+         L = scan.nextInt();
+         C = scan.nextInt();
+        s = scan.nextLine().replaceAll(" ", "").toCharArray();
+        Arrays.sort(s);
+        result = new char[L];
 
-        //이럴 때는 인덱싱 트릭과 유망하지 않은 후보는 애초에 추가하지 않는 방식으로 데크를 사용해야한다.
-
-        Deque<int[]> deque = new LinkedList<>();
-        int N = scan.nextInt();
-        int L = scan.nextInt();
-
-        for( int i = 0 ; i < N ; i ++){
-            addData(deque, new int[]{scan.nextInt(), i});
-            printMin(deque, i, L);
-        }
+        dfs(0,0);
         print();
     }
 

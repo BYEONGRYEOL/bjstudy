@@ -1,9 +1,7 @@
 package org.example;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class 낚시왕_17143 {
     static int R;
@@ -12,31 +10,77 @@ public class 낚시왕_17143 {
     static int Y;
     static int[] dirx = {-100,-1,1,0,0};
     static int[] diry = {-100,0,0,-1,1};
+    static int[][] board;
+    static ArrayList<Shark> sharks;
     static void input() throws Exception {
         R = scan.nextInt();
         C = scan.nextInt();
         int M = scan.nextInt();
+        board = new int[R+1][C+1];
+        sharks = new ArrayList<>();
+        for(int i = 0; i < M; i++){
+            int x = scan.nextInt();
+            int y = scan.nextInt();
+            int s = scan.nextInt();
+            int d = scan.nextInt();
+            int z = scan.nextInt();
+            sharks.add(new Shark(x,y,s,d,z));
+            board[x][y] = z;
+        }
+
+        int sizeSum = 0;
+        for(int col = 1 ; col < C+1; col++){
+            sizeSum += catchShark(col);
+            for(int i = 0 ; i <M ; i ++){
+                sharks.get(i).move();
+            }
+        }
+
     }
-    class Shark{
+    static int catchShark(int col){
+        for(int row = 1; row<R+1; row++){
+            if(board[row][col] >0){
+                int size = board[row][col];
+                board[row][col] = 0;
+                return size;
+            }
+        }
+        return 0;
+    }
+    static class Shark{
         int x;
         int y;
         int speed;
         int dir; // 상하좌우 1,2,3,4
-        int value;
+        int size;
         public Shark(int x, int y, int speed, int dir, int value){
             this.x = x;
             this.y = y;
             this.speed = speed;
             this.dir = dir;
-            this.value = value;
+            this.size = value;
         }
-        public int move(){
-            int newx = this.x + dirx[this.dir] * speed;
-            int newy = this.y + diry[this.dir] * speed;
-            // x = 10, R = 11, newx 14? -> x = R - newx;
-            newx = newx > R ? newx - R : newx;
-            newy = newy > R ? newy - R : newy;
-            return 1;
+        private boolean isAlive(){
+            return board[this.x][this.y] == this.size;
+        }
+        public void move(){
+            if(isAlive() == false)
+                return;
+            board[this.x][this.y] = 0;
+
+            int newx = this.x;
+            int newy = this.y;
+
+            if(this.dir == 1){
+                // 이동할 칸 수 / 끝과 끝 거리 = 짝수라면 방향 그대로, 홀수라면 방향 변경aaaa
+                int moveCellNum = this.speed % ((C-1) * 2);
+            }
+            int alreadySize = board[newx][newy];
+            if(alreadySize > this.size){
+                return;
+            }
+            board[newx][newy] = this.size;
+
         }
 
     }
