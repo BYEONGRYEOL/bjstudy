@@ -1,27 +1,27 @@
 package org.example;
+
 import java.io.*;
-import java.util.Map;
-import java.util.Stack;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class zero10773 {
+public class boj11399_ATM {
+
     static void input() throws Exception {
-        int k = scan.nextInt();
-        // 총합을 구해야하므로 받은 수를 저장하고 있어야 한다.
-        // 가장 최근에 쓴 수를 지우는데, 지우는 명령이 연속될 수 있다.
-        // 스택 자료구조
-        Stack<Integer> s = new Stack<>();
-        for(int z = 0 ; z < k ; z ++){
-            int num = scan.nextInt();
-            if(num==0)
-                s.pop();
-            else
-                s.add(num);
+        // 당연히 작업 시간이 짧은 사람부터 out되어야 한다.
+        int n = scan.nextInt();
+        int[] array = new int[n];
+        for(int i = 0 ; i<  n ; i++)
+            array[i] = scan.nextInt();
+
+        Arrays.sort(array); // 오름차순
+
+        int answer = 0;
+        int waitingTime = 0;
+        for(int i = 0 ; i < n ; i++){
+            waitingTime += array[i];
+            answer += waitingTime;
         }
-        int sum = 0;
-        while(!s.isEmpty())
-            sum+=s.pop();
-        System.out.println(sum);
+        System.out.println(answer);
     }
 
     static void print(){

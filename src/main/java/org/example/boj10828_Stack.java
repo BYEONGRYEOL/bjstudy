@@ -1,29 +1,55 @@
 package org.example;
-
-import java.io.*;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class ATM_11399 {
-
+public class boj10828_Stack {
     static void input() throws Exception {
-        // 당연히 작업 시간이 짧은 사람부터 out되어야 한다.
-        int n = scan.nextInt();
-        int[] array = new int[n];
-        for(int i = 0 ; i<  n ; i++)
-            array[i] = scan.nextInt();
+        int operationCount = scan.nextInt();
+        Stack<Integer> s = new Stack<>();
+        Map<String, Integer> operationMapper = Map.of(
+            "push", 1,
+            "empty", 2,
+            "size", 3,
+            "top", 4,
+            "pop", 5
+        );
 
-        Arrays.sort(array); // 오름차순
+        for(int i = 0 ; i < operationCount; i++){
+            String[] operation = scan.nextLine().split(" ");
 
-        int answer = 0;
-        int waitingTime = 0;
-        for(int i = 0 ; i < n ; i++){
-            waitingTime += array[i];
-            answer += waitingTime;
+            // switch 문자열 됨..
+            switch(operationMapper.get(operation[0])){
+                case 1:
+                    s.add(Integer.parseInt(operation[1]));
+                    break;
+                case 2:
+                    sb.append(s.isEmpty() ? 1 : 0).append('\n');
+                    break;
+                case 3:
+                    sb.append(s.size()).append('\n');
+                    break;
+                case 4:
+                    if(s.isEmpty())
+                        sb.append(-1).append('\n');
+                    else
+                        sb.append(s.peek()).append('\n');
+                    break;
+
+                case 5:
+                    if(s.isEmpty())
+                        sb.append(-1).append('\n');
+                    else
+                        sb.append(s.pop()).append('\n');
+                    break;
+            }
         }
-        System.out.println(answer);
+        print();
     }
 
     static void print(){

@@ -1,28 +1,30 @@
 package org.example;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.util.StringTokenizer;
-import java.util.*;
-public class Main {
-    static void input(){
+
+public class boj11053_가장긴증가하는수열 {
+
+    static void input() throws Exception {
         int n = scan.nextInt();
-        // 가능한 5 봉지의 개수는 n/5개
-        int maxPack5 = n/5;
-        for(int i = maxPack5; i >=0 ; i--){
-            int remain = n - (i * 5);
-            if(remain % 3 == 0){
-                int pack3 = remain/3;
-                System.out.println(i + pack3);
-                return;
-            }
+        int stair[] = new int[n+1];
+        for(int i = 1 ; i < n+1 ; i++)
+            stair[i] = scan.nextInt();
+        int dp[][] = new int[n+1][2];
+        dp[1][0] = 0;
+        dp[1][1] = stair[1];
+        dp[2][0] = stair[1];
+        dp[2][1] = stair[1]+stair[2];
+        for(int i =3; i<=n; i++){
+            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1]);
+            dp[i][1] = Math.max(dp[i-2][1], dp[i-1][0]);
         }
-        System.out.println(-1);
+        System.out.println(Math.max(dp[n][0], dp[n][1]));
     }
 
+    static void print(){
+        System.out.print(sb.toString());
+    }
     static class FastReader {
         BufferedReader br;
         StringTokenizer st;
@@ -61,7 +63,8 @@ public class Main {
             return str;
         }
     }
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws Exception {
         input();
     }
     static FastReader scan = new FastReader();

@@ -1,25 +1,26 @@
 package org.example;
-
 import java.io.*;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class GCD_LCM_2609 {
-    static int GCD(int a, int b){
-        // 입력이 72, 54라면?
-        // 나눠지지 않으므로 54, 18에 대해서 재검사
-        return (a % b == 0) ? b : GCD(b, a%b);
-    }
-    static int LCM(int a, int b){
-        //최소공배수 = a * b / GCD(a,b)
-        // 왜냐면 a/GCD * b/GCD * GCD가 겹치는 인수들을 걸러내는 방법이므로
-        return a * b / GCD(a,b);
-    }
+public class boj10773_zero {
     static void input() throws Exception {
-        int a = scan.nextInt();
-        int b = scan.nextInt();
-        sb.append(GCD(a,b)).append('\n');
-        sb.append(LCM(a,b));
-        print();
+        int k = scan.nextInt();
+        // 총합을 구해야하므로 받은 수를 저장하고 있어야 한다.
+        // 가장 최근에 쓴 수를 지우는데, 지우는 명령이 연속될 수 있다.
+        // 스택 자료구조
+        Stack<Integer> s = new Stack<>();
+        for(int z = 0 ; z < k ; z ++){
+            int num = scan.nextInt();
+            if(num==0)
+                s.pop();
+            else
+                s.add(num);
+        }
+        int sum = 0;
+        while(!s.isEmpty())
+            sum+=s.pop();
+        System.out.println(sum);
     }
 
     static void print(){

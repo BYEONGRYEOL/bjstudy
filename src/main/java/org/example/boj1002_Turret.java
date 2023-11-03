@@ -5,49 +5,40 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
 import java.util.StringTokenizer;
 
-public class Stack10828 {
-    static void input() throws Exception {
-        int operationCount = scan.nextInt();
-        Stack<Integer> s = new Stack<>();
-        Map<String, Integer> operationMapper = Map.of(
-            "push", 1,
-            "empty", 2,
-            "size", 3,
-            "top", 4,
-            "pop", 5
-        );
+public class boj1002_Turret {
 
-        for(int i = 0 ; i < operationCount; i++){
-            String[] operation = scan.nextLine().split(" ");
+    static void input(){
+        int caseNum = scan.nextInt();
+        for(int z = 0; z < caseNum; z++){
+            // 문제 조건 정리
+            int x1 = scan.nextInt();
+            int y1 = scan.nextInt();
+            int r1 = scan.nextInt();
+            int x2 = scan.nextInt();
+            int y2 = scan.nextInt();
+            int r2 = scan.nextInt();
 
-            // switch 문자열 됨..
-            switch(operationMapper.get(operation[0])){
-                case 1:
-                    s.add(Integer.parseInt(operation[1]));
-                    break;
-                case 2:
-                    sb.append(s.isEmpty() ? 1 : 0).append('\n');
-                    break;
-                case 3:
-                    sb.append(s.size()).append('\n');
-                    break;
-                case 4:
-                    if(s.isEmpty())
-                        sb.append(-1).append('\n');
-                    else
-                        sb.append(s.peek()).append('\n');
-                    break;
+            // 문제 이해를 위해 그림을 그려보니까
+            // 두 원이 몇개의 점에서 만나는지를 물어보는 것이다.
+            // 두 원의 중심 사이의 거리가 중요
+            double d_CenterOfCircle = Math.pow((x1-x2) * (x1-x2) + (y1-y2) * (y1-y2), 0.5);
 
-                case 5:
-                    if(s.isEmpty())
-                        sb.append(-1).append('\n');
-                    else
-                        sb.append(s.pop()).append('\n');
-                    break;
-            }
+            if(d_CenterOfCircle == 0 && r1 == r2) // case6 겹침
+                sb.append(-1);
+            else if(d_CenterOfCircle > r1+r2) //case5 멀어서 안만남
+                sb.append(0);
+            else if(d_CenterOfCircle < Math.abs(r1-r2)) //case2 포함관계에 안만남
+                sb.append(0);
+            else if(d_CenterOfCircle == Math.abs(r1-r2)) // case3 내접
+                sb.append(1);
+            else if(d_CenterOfCircle == r1+r2) // case4 외접
+                sb.append(1);
+            else // case1 나머지는 두점에서 만남
+                sb.append(2);
+            //테스트케이스간 줄넘김
+            sb.append('\n');
         }
         print();
     }
@@ -93,8 +84,7 @@ public class Stack10828 {
             return str;
         }
     }
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         input();
     }
     static FastReader scan = new FastReader();

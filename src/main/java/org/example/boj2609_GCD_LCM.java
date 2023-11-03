@@ -1,66 +1,24 @@
 package org.example;
 
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
 
-public class dfs와bfs {
-    static int N;
-    static int M;
-    static boolean[] visited;
-    static int S;
-    static ArrayList<Integer>[] edges;
-
-    static void dfs(int node){
-        sb.append(node).append(' ');
-        visited[node] = true;
-        for(Integer next : edges[node]){
-            if(!visited[next]){
-                dfs(next);
-            }
-        }
+public class boj2609_GCD_LCM {
+    static int GCD(int a, int b){
+        // 입력이 72, 54라면?
+        // 나눠지지 않으므로 54, 18에 대해서 재검사
+        return (a % b == 0) ? b : GCD(b, a%b);
     }
-    static void bfs(int start){
-        Queue<Integer> q = new LinkedList<>();
-        q.add(start);
-        while(!q.isEmpty()){
-            Integer now = q.poll();
-            if(visited[now])
-                continue;
-            visited[now] = true;
-            sb.append(now).append(' ');
-            for(Integer next : edges[now]){
-                if(!visited[next]){
-                    q.add(next);
-                }
-            }
-        }
+    static int LCM(int a, int b){
+        //최소공배수 = a * b / GCD(a,b)
+        // 왜냐면 a/GCD * b/GCD * GCD가 겹치는 인수들을 걸러내는 방법이므로
+        return a * b / GCD(a,b);
     }
     static void input() throws Exception {
-        N = scan.nextInt();
-        M = scan.nextInt();
-        S = scan.nextInt();
-        edges = new ArrayList[N+1];
-        visited = new boolean[N+1];
-        for(int i = 1 ; i < N+1; i ++){
-            edges[i] = new ArrayList<>();
-        }
-
-        for(int i = 0 ; i  < M; i++){
-            int s = scan.nextInt();
-            int e = scan.nextInt();
-            edges[s].add(e);
-            edges[e].add(s);
-        }
-        for(int i = 1 ; i < N+1; i ++){
-            edges[i].sort((i1,i2)->i1-i2);
-        }
-
-        dfs(S);
-        print();
-        sb.setLength(0);
-        sb.append('\n');
-        Arrays.fill(visited, false);
-        bfs(S);
+        int a = scan.nextInt();
+        int b = scan.nextInt();
+        sb.append(GCD(a,b)).append('\n');
+        sb.append(LCM(a,b));
         print();
     }
 
