@@ -1,16 +1,42 @@
 package org.example;
 
 import java.io.*;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class 오아시스재결합_3015 {
+public class boj3015_오아시스재결합 {
 
     static void input() throws Exception {
-        // 2 4 1 4 7 6 4 4 2  85  9
-        // 인접한 두 사람은 항상 볼수 잇따. n-1
-        //  10 9 8 7 6 7
-        // 2 4 1 2 2 5 1
-        //
+        // 1 2 3
+        Stack<long[]> s = new Stack<>();
+        int n = scan.nextInt();
+
+        long answer = 0;
+        for(int i = 0 ; i < n ; i ++){
+            int now = scan.nextInt();
+            long sameHeight = 1;
+            while(!s.isEmpty() && s.peek()[0] <=now){
+                if(s.peek()[0] == now){
+                    answer += s.peek()[1];
+                    sameHeight = s.peek()[1] + 1;
+                    s.pop();
+                }
+                else{
+                    answer += s.peek()[1];
+                    s.pop();
+                    sameHeight = 1;
+                }
+
+            }
+
+            if(!s.isEmpty()) // 인접한
+                answer++;
+            s.push(new long[]{now, sameHeight});
+        }
+        System.out.println(answer);
+
+
+
     }
 
     static void print(){

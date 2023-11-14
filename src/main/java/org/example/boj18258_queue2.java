@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class boj18258_queue2 {
+public class queue2_18258 {
     static void input() throws Exception {
         int operationCount = scan.nextInt();
         // 간단한 데크 자료구조 문제인데,
