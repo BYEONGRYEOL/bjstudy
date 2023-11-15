@@ -1,26 +1,28 @@
 package org.example;
 
 import java.io.*;
+import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class 영화감독숌1436 {
+public class boj1927_최소힙 {
     static void input() throws Exception {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
         int n = scan.nextInt();
-        int shomNumber = 666;
-        int count = 0;
-        int temp = 0;
-        while(count < n){
-            temp = shomNumber;
-            while(temp > 0){
-                if(temp % 1000 == 666){
-                    count++;
-                    break;
-                }
-                temp /= 10; // 한자리씩 빼가면서
+        for(int i = 0 ; i < n  ; i ++){
+            int operation = scan.nextInt();
+            if(operation == 0){
+                if(pq.isEmpty())
+                    sb.append(0);
+                else
+                    sb.append(pq.poll());
+                sb.append('\n');
             }
-            shomNumber ++;
+            else{
+                pq.add(operation);
+            }
         }
-        System.out.println(shomNumber-1);
+        print();
     }
 
     static void print(){

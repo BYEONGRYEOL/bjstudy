@@ -1,26 +1,34 @@
 package org.example;
 
 import java.io.*;
+import java.util.*;
 import java.util.StringTokenizer;
 
-public class 영화감독숌1436 {
+public class boj11866_요세푸스문제0 {
     static void input() throws Exception {
+        // 1 2 3 4 5 6 7
+        // 앞에서 빼서 뒤에 이어붙이는 작업
+        Queue<Integer> q = new LinkedList<>();
         int n = scan.nextInt();
-        int shomNumber = 666;
-        int count = 0;
-        int temp = 0;
-        while(count < n){
-            temp = shomNumber;
-            while(temp > 0){
-                if(temp % 1000 == 666){
-                    count++;
-                    break;
-                }
-                temp /= 10; // 한자리씩 빼가면서
-            }
-            shomNumber ++;
+        for(int i = 1 ; i <= n; i++){
+            q.add(i);
         }
-        System.out.println(shomNumber-1);
+        int k = scan.nextInt();
+        int[] answer = new int[n];
+        int index = 0;
+        while(!q.isEmpty()){
+            int moves = k;
+            for(int move = 0 ; move < k-1 ; move ++) // k-1명의 사람은 그냥 뒤로 보내고
+                q.add(q.poll());
+            answer[index++] = q.poll(); // k번째는 정답에 추가
+        }
+
+        sb.append('<');
+        for(int i = 0 ; i < n ; i ++)
+            sb.append(answer[i]).append(',').append(' ');
+        sb.delete(sb.length()-2, sb.length());
+        sb.append('>');
+        print();
     }
 
     static void print(){

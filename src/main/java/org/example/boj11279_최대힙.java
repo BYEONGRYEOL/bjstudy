@@ -2,28 +2,24 @@ package org.example;
 
 import java.io.*;
 import java.util.*;
-import java.util.StringTokenizer;
 
-public class 요세푸스문제0_11866 {
+public class boj11279_최대힙 {
     static void input() throws Exception {
-        Queue<Integer> q = new LinkedList<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         int n = scan.nextInt();
-        int k = scan.nextInt();
-        // k-1만큼의 큐 회전이 필요하다.
-        for(int i = 1 ; i<=n;i++)
-            q.add(i);
-
-        sb.append('<');
-        while(!q.isEmpty()){
-            for(int z=0;z<k-1;z++){
-                int temp = q.poll();
-                q.add(temp);
+        for(int i = 0 ; i < n  ; i ++){
+            int operation = scan.nextInt();
+            if(operation == 0){
+                if(pq.isEmpty())
+                    sb.append(0);
+                else
+                    sb.append(pq.poll());
+                sb.append('\n');
             }
-            sb.append(q.poll()).append(',').append(' ');
+            else{
+                pq.add(operation);
+            }
         }
-        // 마지막 ", " 제거
-        sb.delete(sb.length() -2, sb.length());
-        sb.append('>');
         print();
     }
 
