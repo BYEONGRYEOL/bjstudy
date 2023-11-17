@@ -3,26 +3,29 @@ package org.example;
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class 분해합_2231 {
+public class bos2231_분해합 {
 
+    static final int MAX = 1000000;
     static void input() throws Exception {
-        int n = scan.nextInt();
-        int m = 0;
-
-        while(m <1000000){
-            m++;
-            int temp = m;
+        int num = scan.nextInt();
+        // num의 가장 작은 생성자는 num보다 항상 작다
+        boolean findConstructor = false;
+        for(int i = 1; i < MAX; i++){
+            int temp = i;
             int sum = temp;
             while(temp > 0){
                 sum += temp % 10;
-                temp /=10;
+                temp /= 10;
             }
-            if(sum == n){
-                System.out.println(m);
-                return;
+            if(num == sum){
+                findConstructor = true;
+                System.out.println(i);
+                break;
             }
         }
-        System.out.println(0);
+        if(!findConstructor)
+            System.out.println(0);
+
     }
 
     static void print(){
