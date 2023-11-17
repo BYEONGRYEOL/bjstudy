@@ -1,28 +1,28 @@
 package org.example;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class 블랙잭_2798 {
+public class boj2798_블랙잭 {
 
     static void input() throws Exception {
-        // 카드의 개수가 많지 않으니 반복문으로 해결
-        int n = scan.nextInt();
-        int objNumber = scan.nextInt();
-        int cards[] = new int[n];
-        for(int i = 0 ; i < n ; i ++)
+        int cardNum = scan.nextInt();
+        int targetNum = scan.nextInt();
+        int[] cards = new int[cardNum];
+        for(int i = 0 ; i < cardNum; i++)
             cards[i] = scan.nextInt();
+        // 100개니까 시간복잡도 상관 x, 문제조건예외가 없음
 
-        int maxNum = 0;
-        for(int i = 0 ; i < n ; i ++)
-            for(int j = i+1; j<n; j++)
-                for(int k = j+1; k<n;k++){
-                    int num =cards[i]+cards[j]+cards[k];
-                    if(num > maxNum &&num <= objNumber)
-                        maxNum = num;
+        int maxSum = 0;
+        for(int i  =0  ; i < cardNum; i ++)
+            for(int j = i+1; j < cardNum; j++)
+                for(int k = j+1; k < cardNum ; k++) {
+                    int nowSum = cards[i] + cards[j] + cards[k];
+                    if(nowSum <= targetNum)
+                        maxSum = Math.max(maxSum, nowSum);
                 }
-        System.out.println(maxNum);
+
+        System.out.println(maxSum);
     }
 
     static void print(){
