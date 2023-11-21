@@ -1,29 +1,31 @@
 package org.example;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class 동전0_11047 {
+public class boj11047_동전0 {
 
     static void input() throws Exception {
         int n =scan.nextInt();
-        int objMoney = scan.nextInt();
-        int[] coins = new int[n];
-        for(int i = 0 ; i < n  ; i++)
+        int target = scan.nextInt();
+        // A_i 는 A_{i-1} 의 배수 라는 조건 때문에,
+        // 서로소인 수를 만들기 위해 작은 단위의 동전을 사용하지 않아도 된다.
+        int coins[] = new int[n];
+        for(int i = 0 ; i < n ; i++)
             coins[i] = scan.nextInt();
-        int index = n-1;
-        int nowMoney = 0;
-        int coinCount = 0;
-        while(objMoney > 0){
-            if(coins[index] > objMoney)
-                index--;
-            else {
-                objMoney -= coins[index];
-                coinCount++;
+        n--;
+        int result = 0;
+        while(true){
+            while(target >= coins[n]){
+                target -= coins[n];
+                result++;
             }
+            if(target == 0)
+                break;
+            n--;
         }
-        System.out.println(coinCount);
-
+        System.out.println(result);
     }
 
     static void print(){
