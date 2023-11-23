@@ -1,25 +1,30 @@
 package org.example;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj11053_가장긴증가하는수열 {
+public class boj11053_가장긴증가하는부분수열 {
 
     static void input() throws Exception {
         int n = scan.nextInt();
-        int stair[] = new int[n+1];
-        for(int i = 1 ; i < n+1 ; i++)
-            stair[i] = scan.nextInt();
-        int dp[][] = new int[n+1][2];
-        dp[1][0] = 0;
-        dp[1][1] = stair[1];
-        dp[2][0] = stair[1];
-        dp[2][1] = stair[1]+stair[2];
-        for(int i =3; i<=n; i++){
-            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1]);
-            dp[i][1] = Math.max(dp[i-2][1], dp[i-1][0]);
+
+        int array[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            array[i] = scan.nextInt();
         }
-        System.out.println(Math.max(dp[n][0], dp[n][1]));
+
+        int dp[] = new int[n];
+        Arrays.fill(dp, 1);
+
+        for (int i = 1; i < n; i++) {
+            for (int j = i-1; j >= 0; j--) {
+                if(array[i] > array[j]) { // 현재 i는 j보다 크므로 증가하는 부분 수열에 추가 가능
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        System.out.println(Arrays.stream(dp).max().getAsInt());
     }
 
     static void print(){
