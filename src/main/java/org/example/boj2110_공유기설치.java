@@ -1,60 +1,58 @@
 package org.example;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
+import javax.swing.*;
 
-public class boj_1011_FlymetotheAlphaCentauri {
+public class boj2110_공유기설치 {
 
-
-    static void input() throws Exception {
-        // 현재 이동 길이를 k라고하면
-        // 다음은 k-1 k k+1 중 하나
-
-        // 1
-        // 1
-        // 2
-        // 1 1
-        // 3
-        // 1 1 1
-        // 4
-        // 1 2 1
-        // 5
-        // 1 2 1 1
-        // 6
-        // 1 2 2 1
-        // 7
-        // 1 2 2 1 1
-        // 1 2 3 2 1로 돌아오는 것이 5개의 최대이동
-        // 9
-        // 1 2 3 4 3 2 1
-        // 16
-        // 1 2 3 4 5 4 3 2 1
-        // 25
-        // 제곱수가 될 때 최소이동횟수가 2씩 늘어난다.
-
-        // 10 ~ 16인 경우 반을 나눠서 6,7
-        // 17 ~ 25 인 경우 반을 나눠서8, 9
-
-        int cases = scan.nextInt();
-        for(int i = 0 ; i < cases; i++){
-            long x = scan.nextInt();
-            long y = scan.nextInt();
-            long d = y - x;
-            int root = (int)Math.pow(d - 1, 0.5);
-            // 이러면 10~16 의 범위를 9~15로 바꿀 수 있다.
-            // 모두 루트를 씌웠을 때 3.xxx 로 표현
-            // 현재 숫자가 9~15의 범위에서 중앙을 기준으로 어느쪽에 가까운지?
-            // (9+15)/2 를 해봐야 암
-            double mid = (Math.pow(root, 2) + Math.pow(root+1, 2))/2;
-
-            sb.append((d>=mid)? root*2+1 : root *2).append('\n');
+    static boolean putWifiWithDistance(int distance, int wifiCount, int[] houses){
+        int recentPos = -1000000000;
+        for (int i = 0; i < houses.length; i++) {
+            if(houses[i] - recentPos >=distance){
+                wifiCount --;
+                recentPos = houses[i];
+            }
+            if(wifiCount==0)
+                return true;
         }
-        print();
+        return false;
+    }
+    static void input() throws Exception {
+        // hint 1: 최적화 문제임
+        // hint 2: 최소 3의 거리를 두고 공유기를 설치할 수 있는 지 해보세요 라고 질문했다면 답변이 쉽다.
+        // -> 이분탐색 parametric search
 
+        int n = scan.nextInt();
+        int numOfWifi = scan.nextInt();
+
+        int houses[] = new int[n];
+        for (int i = 0; i < n; i++) {
+            houses[i] = scan.nextInt();
+        }
+        Arrays.sort(houses);
+
+        int l = 1;
+        int r = 1000000000;
+        int m = 0;
+        while(l + 1 < r){
+            m = (l+r)/2;
+            if(putWifiWithDistance(m, numOfWifi, houses)){
+                l = m;
+            }
+            else{
+                r = m;
+            }
+        }
+        System.out.println(l);
     }
 
     static void print(){
@@ -103,8 +101,6 @@ public class boj_1011_FlymetotheAlphaCentauri {
         input();
     }
     static FastReader scan = new FastReader();
-    static FastReader scanf;
-
     static StringBuilder sb = new StringBuilder();
 
 
