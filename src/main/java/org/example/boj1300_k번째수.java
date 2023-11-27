@@ -6,38 +6,64 @@ import java.util.StringTokenizer;
 public class boj1300_k번째수 {
 
     static void input() throws Exception {
-        // 1 2   3  4  5
-        // 2 4   6  8 10
-        // 3 6   9 12 15
-        // 4 8  12 16 20
-        // 5 10 15 20 25 30
-        // // 1 2 3 4 5 6 7
-        // 1행에서 x보다 작거나 같은 수의 개수는 x/1개
-        // 2행에서 x보다 작거나 같은 수의 개수는 x/2개
-        // 1 2 3 4 5 6
-        // 2 4 6 8 10
-        // 3 6 9
-        // 4 8
-        // 5 10
-        // 6
-        // 이 문제에서 15번째 수인 12를 찾고자하면,
-        // 1행에서 12/1=12이 아닌 n(=4)개,
-        // 2행에서 12/2=6이 아닌 n(=4)개,
-        // 그러르모 i행에서 x보다 작거나 같은 수의 개수는 min(x/i, n)개이다.
-        // sum of min(n, x/i) = k 가 되는 최소의 x값 찾기
+        // 1
 
-        long n = scan.nextInt();
+        // 1 2
+        // 2 4
+
+        // 1 2 3
+        // 2 4 6
+        // 3 6 9
+
+        // 1 2 3 4
+        // 2 4 6 8
+        // 3 6 9 12
+        // 4 8 12 16
+
+        // 순서를 적용하려니 중복되는 숫자가 많아서 순서가 꼬인다
+        // 수 : 순서(몇번째)
+        // 1 : 1
+        // 2 : 2
+        // 3 : 4
+        // 4 : 6
+        // 6 : 9
+        // 실제로 데이터로 존재하지 않는 순서를 가지고 찾으려고 하니 어려움
+
+        // 내가 어떤 수를 입력하면 몇번째인지는 알아낼 수 있는가? -> 이게 맞다면 이분탐색
+        // P1 : 8을 입력한 경우 8보다 작은 수들은 각 행에서 쉽게 찾아낼 수 있다. 총 10개, 따라서 8은 11번째수이다.
+        // P2 : 7을 입력한 경우에도 위의 결과와 같이 7이 11번째수라는 출력이 나올 수가 있다.
+        // case i : 만약 7이 보드에 존재했다면 P1과 P2의 결과가 달랐을 것.
+        // case ii : 만약 7이 보드에 존재하지 않는다면 P1, P2의 결과가 같으므로, 입력한 수가 큰 쪽이 옳은 답이다.
+
+        int n = scan.nextInt();
         int k = scan.nextInt();
-        long l = 1;
-        long r = n*n;
-        long m = 0;
-        while(l<r){
-            m = (l+r)/2;
-            long count = lessThanCount(n, m);
-            if(count < k)  l = m+1;
-            else if( count >= k) r = m;
+
+        int l = 1;
+        int r = 1000000000;
+        int m = 0;
+
+        while(l + 1 < r){
+            m = (l+r) / 2;
+            if(k > calculateK(n,m)){
+                l= m;
+            }
+            else{
+                r=m;
+            }
         }
-        System.out.println(l);
+        if(calculateK(n,l) >=k){
+            System.out.println(l);
+        }
+        else
+            System.out.println(r);
+    }
+
+    static int calculateK(int n, int m){
+        int calculateK = 0;
+        for(int i = 1 ; i <= n; i++){
+            calculateK += Math.min(m/i, n);
+        }
+        return calculateK;
     }
     static long lessThanCount(long n, long x){
         long count = 0;
