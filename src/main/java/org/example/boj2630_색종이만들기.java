@@ -1,65 +1,50 @@
 package org.example;
 
-import java.io.*;
-import java.sql.Array;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-public class boj1260_dfs와bfs {
+public class boj2630_색종이만들기 {
 
-
-    static void dfs(ArrayList<Integer>[] edges, boolean[] visited, int node){
-        if(visited[node])
-            return;
-        visited[node] = true;
-        sb.append(node).append(' ');
-        for (Integer next: edges[node])
-            if(!visited[next])
-                dfs(edges, visited, next);
-    }
-
-    static void bfs(ArrayList<Integer>[] edges, boolean[] visited, int node){
-        Queue<Integer> q = new LinkedList<>();
-        q.add(node);
-        while(!q.isEmpty()){
-            Integer now = q.poll();
-            if(visited[now])
-                continue;
-            visited[now] = true;
-            sb.append(now).append(' ');
-            for(Integer next : edges[now]){
-                if(!visited[next]){
-                    q.add(next);
+    static int ZERO_COUNT = 0;
+    static int ONE_COUNT = 0;
+    static void checkColor(int sx, int sy, int offset, int[][] array){
+        int color = array[sx][sy];
+        for (int dx = 0; dx < offset; dx++) {
+            for (int dy = 0; dy < offset; dy++) {
+                if(array[sx+dx][sy+dy] != color){
+                    checkColor(sx,sy,offset/2,array);
+                    checkColor(sx+offset/2,sy,offset/2,array);
+                    checkColor(sx,sy+offset/2,offset/2,array);
+                    checkColor(sx+offset/2,sy+offset/2,offset/2,array);
+                    return;
                 }
             }
         }
-    }
+        if(color ==0){
+            ZERO_COUNT++;
+        }
+        else
+            ONE_COUNT++;
 
+    }
     static void input() throws Exception {
         int n = scan.nextInt();
-        int m = scan.nextInt();
-        int start = scan.nextInt();
-
-        ArrayList<Integer>[] edges = new ArrayList[n+1];
-        for (int i = 0; i < n + 1; i++) {
-            edges[i] = new ArrayList<>();
+        int[][] array = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                array[i][j] = scan.nextInt();
+            }
         }
-        for (int i = 0; i < m; i++) {
-            int s = scan.nextInt();
-            int e = scan.nextInt();
-            edges[s].add(e);
-            edges[e].add(s);
-        }
-
-        for (int i = 0; i < n+1; i++) {
-            edges[i].sort((i1, i2) -> i1 - i2);
-        }
-
-        boolean visited[] = new boolean[n+1];
-        dfs(edges, visited, start);
-        sb.append('\n');
-        Arrays.fill(visited, false);
-        bfs(edges, visited, start);
+        checkColor(0,0,n, array);
+        sb.append(ZERO_COUNT).append('\n').append(ONE_COUNT);
         print();
+
+
     }
 
     static void print(){
