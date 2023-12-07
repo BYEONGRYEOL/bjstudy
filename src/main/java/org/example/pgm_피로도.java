@@ -1,6 +1,8 @@
+package org.example;
+
 import java.util.*;
 
-class Solution {
+class pgm_피로도 {
 	public static int[] ORDER;
 	public static boolean[] VISITED;
 	public static int POSSIBLE_MAX;
