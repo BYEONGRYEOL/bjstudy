@@ -3,7 +3,7 @@ package org.example;
 import java.util.Arrays;
 
 import java.util.*;
-class Solution {
+class pgm_다리를지나는트럭 {
 	public static int solution(int bridge_length, int weight, int[] truck_weights) {
 		int answer = 0;
 		// 0   -     -      7 4 5 6
