@@ -6,30 +6,36 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class boj11053_가장긴증가하는부분수열 {
+public class boj1269_대칭차집합 {
 
 	static void input() throws Exception {
+		Map<Integer, Integer> numberCount = new HashMap<>();
 		int n = scan.nextInt();
-
-		int[] array = new int[n];
-		for (int i = 0; i < n; i++) {
-			array[i] = scan.nextInt();
-		}
-
-		int[] dp = new int[n];
-		Arrays.fill(dp, 1);
-
-		for (int i = 1; i < n; i++) {
-			for (int j = i - 1; j >= 0; j--) {
-				if (array[i] > array[j]) { // 현재 i는 j보다 크므로 증가하는 부분 수열에 추가 가능
-					dp[i] = Math.max(dp[i], dp[j] + 1);
-				}
+		int m = scan.nextInt();
+		int duplicateCount = 0;
+		for (int i = 0; i < n + m; i++) {
+			int number = scan.nextInt();
+			if (numberCount.containsKey(number)) {
+				duplicateCount++;
+			} else {
+				numberCount.put(number, 0);
 			}
 		}
-		System.out.println(Arrays.stream(dp).max().getAsInt());
+		// 8 - (A,B한테 할당되어야했을 숫자) 2 * 2(실제로 중복이 발생한 수)
+		List<String> d = new ArrayList<>();
+		d.sort((str1, str2) -> {
+			if (str1.length() == str2.length())
+				return str1.compareTo(str2);
+			return str1.length() - str2.length();
+		});
+
+		System.out.println(numberCount.size() - duplicateCount);
 	}
 
 	static void print() {
