@@ -1,0 +1,6 @@
+*.class
+*.bin
+
+*.xml
+*.lock
+*.csv

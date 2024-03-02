@@ -1,0 +1,32 @@
+아래 처럼 풀지 않도록 주의
+엣지케이스를 하나하나 조건문으로 분기하여 처리할 필요가 없다.
+// int n = scan.nextInt();
+// int stairs[] = new int[n];
+// for (int i = 0; i < n; i++) {
+//     stairs[i] = scan.nextInt();
+// }
+// int dp[] = new int[n];
+//
+// // bottom up, 모든 i가 정답일 때를 가정하여 점화식 작성
+//
+// dp[0] = stairs[0]; // 첫계단이 목적지인 경우 당연히 밟는게 최대
+// if(n==1){
+//     System.out.println(dp[n-1]);
+//     return;
+// }
+// dp[1] = stairs[1] + stairs[0]; // 2번째 계단이 목적지인 경우 당연히 둘다 밟는게 최대 (dp배열과는 아예 관여하지 않으므로 조건에 위배 x)
+// if(n==2){
+//     System.out.println(dp[n-1]);
+//     return;
+// }
+// dp[2] = stairs[2] + Math.max(stairs[0], stairs[1]); // 3번째 계단이 목적지인경우, 1,2는 둘다 밟을 수 없고 둘중 하나는 밟아야 한다.
+// if(n==3){
+//     System.out.println(dp[n-1]);
+//     return;
+// }
+//
+// for(int i = 3 ;i< n; i++){
+//     // OXOO 인 경우와 OXO 인 경우
+//     dp[i] = Math.max(dp[i-3] + stairs[i-1] + stairs[i], dp[i-2] + stairs[i]);
+// }
+// System.out.println(dp[n-1]);
