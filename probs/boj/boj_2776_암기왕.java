@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -15,20 +16,20 @@ public class boj_2776_암기왕 {
 
 	static void input() throws Exception {
 
-		int t = scan.nextInt();
-		HashMap<Integer, Integer> map = new HashMap<>(1000000);
-		for (int i = 0; i < t; i++) {
-			map.clear();
-			int n = scan.nextInt();
-			for (int j = 0; j < n; j++) {
-				map.put(scan.nextInt(),0);
-			}
-			int m = scan.nextInt();
-			for (int j = 0; j < m; j++) {
-				sb.append(map.containsKey(scan.nextInt()) ? 1 : 0).append('\n');
-			}
-		}
-		print();
+		// int t = scan.nextInt();
+		// HashMap<Integer, Integer> map = new HashMap<>(1000000);
+		// for (int i = 0; i < t; i++) {
+		// 	map.clear();
+		// 	int n = scan.nextInt();
+		// 	for (int j = 0; j < n; j++) {
+		// 		map.put(scan.nextInt(),0);
+		// 	}
+		// 	int m = scan.nextInt();
+		// 	for (int j = 0; j < m; j++) {
+		// 		sb.append(map.containsKey(scan.nextInt()) ? 1 : 0).append('\n');
+		// 	}
+		// }
+		// print();
 
 		// int t = scan.nextInt();
 		// for (int i = 0; i < t; i++) {
@@ -44,6 +45,21 @@ public class boj_2776_암기왕 {
 		// 	}
 		// }
 		// print();
+
+		int t = scan.nextInt();
+		HashSet<Integer> set = new HashSet<>();
+		for (int i = 0; i < t; i++) {
+			set.clear();
+			int n = scan.nextInt();
+			for (int j = 0; j < n; j++) {
+				set.add(scan.nextInt());
+			}
+			int m = scan.nextInt();
+			for (int j = 0; j < m; j++) {
+				sb.append(set.contains(scan.nextInt()) ? 1 : 0).append('\n');
+			}
+		}
+		print();
 
 	}
 
