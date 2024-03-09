@@ -40,6 +40,7 @@ public class boj_12015_가장긴증가하는부분수열2 {
 			if (list.get(list.size() - 1) < array[i]) {
 				// 증가중
 				list.add(array[i]);
+
 			} else {
 				int insertIndex = Collections.binarySearch(list, array[i]);
 				// 만약 insertIndex가 양수라면 값을 찾았으니 상관없다.
