@@ -8,16 +8,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_9654_나부함대데이터 {
+public class boj_10430_나머지 {
 
 	static void input() throws Exception {
-		System.out.println(
-			"" + "SHIP NAME      CLASS          DEPLOYMENT IN SERVICE\n"
-				+ "N2 Bomber      Heavy Fighter  Limited    21        \n"
-				+ "J-Type 327     Light Combat   Unlimited  1         \n"
-				+ "NX Cruiser     Medium Fighter Limited    18        \n"
-				+ "N1 Starfighter Medium Fighter Unlimited  25        \n"
-				+ "Royal Cruiser  Light Combat   Limited    4         ");
+		int a = scan.nextInt();
+		int b = scan.nextInt();
+		int c = scan.nextInt();
+		//첫째 줄에 (A+B)%C, 둘째 줄에 ((A%C) + (B%C))%C, 셋째 줄에 (A×B)%C, 넷째 줄에 ((A%C) × (B%C))%C를 출력한다.
+		sb.append((a+b)%c).append("\n");
+		sb.append(((a%c)+(b%c))%c).append("\n");
+		sb.append(a*b%c).append("\n");
+		sb.append(((a%c)*(b%c))%c);
+		print();
 	}
 
 	static void print() {
