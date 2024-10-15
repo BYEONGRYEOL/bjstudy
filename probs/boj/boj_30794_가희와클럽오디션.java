@@ -6,17 +6,39 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class boj_31495_그게무슨코드니 {
+public class boj_30794_가희와클럽오디션 {
 
 	static void input() throws Exception {
-		String line = scan.nextLine();
-		if(line.charAt(0) == '"' && line.charAt(line.length()-1) == '"' && line.length() >2){
-			System.out.println(line.substring(1, line.length()-1));
-		} else{
-			System.out.println("CE");
-		}
+		String[] line = scan.nextLine().split(" ");
+		int count = Integer.parseInt(line[0]);
+		//miss일 때
+		// $0$점을 받습니다.
+		// bad일 때
+		// $200$에
+		// $lv$을 곱한 점수를 받습니다.
+		// cool일 때
+		// $400$에
+		// $lv$을 곱한 점수를 받습니다.
+		// great일 때
+		// $600$에
+		// $lv$을 곱한 점수를 받습니다.
+		// perfect
+		//  
+		// $n$연팩일 때
+		// $n \cdot lv$에
+		// $1\,000$을 곱한 점수를 받습니다
+		String criteria = line[1];
+		Map<String, Integer> score = Map.of(
+			"miss", 0,
+			"bad", 200,
+			"cool", 400,
+			"great", 600,
+			"perfect", 1000
+		);
+		System.out.println(score.get(criteria) * count);
 	}
 
 	static void print() {

@@ -8,15 +8,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_31495_그게무슨코드니 {
+public class boj_30868_개표 {
 
 	static void input() throws Exception {
-		String line = scan.nextLine();
-		if(line.charAt(0) == '"' && line.charAt(line.length()-1) == '"' && line.length() >2){
-			System.out.println(line.substring(1, line.length()-1));
-		} else{
-			System.out.println("CE");
+		int iter = scan.nextInt();
+		for (int i = 0; i < iter; i++) {
+			int n = scan.nextInt();
+			sb.append("++++ ".repeat(n/5)).append("|".repeat(n%5)).append('\n');
 		}
+		print();
 	}
 
 	static void print() {

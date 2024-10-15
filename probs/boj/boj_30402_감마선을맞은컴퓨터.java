@@ -8,14 +8,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_31495_그게무슨코드니 {
+public class boj_30402_감마선을맞은컴퓨터 {
 
 	static void input() throws Exception {
-		String line = scan.nextLine();
-		if(line.charAt(0) == '"' && line.charAt(line.length()-1) == '"' && line.length() >2){
-			System.out.println(line.substring(1, line.length()-1));
-		} else{
-			System.out.println("CE");
+		for (int i = 0; i < 15; i++) {
+			String line = scan.nextLine();
+			//춘배의 사진이라면 chunbae, 나비의 사진이라면 nabi, 영철의 사진이라면 yeongcheol을 출력한다.
+			if(line.contains("w")){
+				System.out.println("chunbae");
+				return;
+			} else if(line.contains("b")){
+				System.out.println("nabi");
+				return;
+			} else if(line.contains("g")){
+				System.out.println("yeongcheol");
+				return;
+			}
 		}
 	}
 
@@ -75,5 +83,4 @@ public class boj_31495_그게무슨코드니 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
-
 }

@@ -8,15 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_31495_그게무슨코드니 {
+public class boj_31994_강당대관 {
 
 	static void input() throws Exception {
-		String line = scan.nextLine();
-		if(line.charAt(0) == '"' && line.charAt(line.length()-1) == '"' && line.length() >2){
-			System.out.println(line.substring(1, line.length()-1));
-		} else{
-			System.out.println("CE");
+		int maxParticipant = 0;
+		String maxSeminar = "";
+		for (int i = 0; i < 7; i++) {
+			String[] seminarAndParticipant = scan.nextLine().split(" ");
+			if(maxParticipant < Integer.parseInt(seminarAndParticipant[1])){
+				maxSeminar = seminarAndParticipant[0];
+				maxParticipant = Integer.parseInt(seminarAndParticipant[1]);
+			}
 		}
+		System.out.println(maxSeminar);
 	}
 
 	static void print() {
@@ -75,5 +79,4 @@ public class boj_31495_그게무슨코드니 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
-
 }

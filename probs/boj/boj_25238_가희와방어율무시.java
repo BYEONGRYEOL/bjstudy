@@ -8,15 +8,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_31495_그게무슨코드니 {
+public class boj_25238_가희와방어율무시 {
 
 	static void input() throws Exception {
-		String line = scan.nextLine();
-		if(line.charAt(0) == '"' && line.charAt(line.length()-1) == '"' && line.length() >2){
-			System.out.println(line.substring(1, line.length()-1));
-		} else{
-			System.out.println("CE");
-		}
+		int armor = scan.nextInt();
+		int crashPercent = scan.nextInt();
+		if(armor * ((double)(100 - crashPercent) / 100) >= 100){
+			System.out.println(0);
+		} else
+			System.out.println(1);
 	}
 
 	static void print() {
