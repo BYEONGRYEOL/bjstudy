@@ -8,14 +8,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_25915_연세여사랑한다 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		String password = "ILOVEYONSEI";
+		String start = scan.next();
+		String input = start.concat(password);
+		int action = 0;
+		for (int i = 0; i < input.length() - 1; i++) {
+			action += Math.abs(input.charAt(i + 1) - input.charAt(i));
 		}
-		System.out.println(cost);
+		System.out.println(action);
 	}
 
 	static void print() {
@@ -74,4 +77,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

@@ -8,14 +8,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_5692_팩토리얼진법 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		while(true){
+			String line = scan.nextLine();
+			if(line.equals("0"))break;
+			int result = 0;
+			for (int i = 0; i < line.length(); i++) {
+				result += (line.charAt(line.length() - 1-i) - '0') * fact(i+1);
+				System.out.println(result + " " + i);
+			}
+			sb.append(result).append('\n');
 		}
-		System.out.println(cost);
+		print();
+	}
+	static int fact(int n){
+		if(n == 1) return 1;
+		return n * fact(n-1);
 	}
 
 	static void print() {

@@ -1,21 +1,46 @@
 package probs.boj;
 
+import static java.lang.Double.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_6322_직각삼각형의두변 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int[] len = new int[3];
+		int idx = 1;
+		while(true){
+			for (int i = 0; i < 3; i++) {
+				len[i] = scan.nextInt();
+			}
+			if(len[0] == 0) break;
+
+			if(len[0] == -1){
+				double computedLen = Math.sqrt(len[2] * len[2] - len[1] * len[1]);
+				if(Double.isNaN(computedLen) || computedLen == 0){
+					System.out.printf("Triangle #%d\nImpossible.\n\n",idx++);
+				} else System.out.printf("Triangle #%d\na = %.3f\n\n",idx++,computedLen);
+			}
+			else if(len[1] == -1){
+				double computedLen = Math.sqrt(len[2] * len[2] - len[0] * len[0]);
+				if(Double.isNaN(computedLen) || computedLen == 0){
+					System.out.printf("Triangle #%d\nImpossible.\n\n",idx++);
+				} else System.out.printf("Triangle #%d\nb = %.3f\n\n",idx++,computedLen);
+			}
+			else if(len[2] == -1){
+				double computedLen = Math.sqrt(len[0] * len[0] + len[1] * len[1]);
+				if(Double.isNaN(computedLen) || computedLen == 0){
+					System.out.printf("Triangle #%d\nImpossible.\n\n",idx++);
+				} else System.out.printf("Triangle #%d\nc = %.3f\n\n",idx++,computedLen);
+			}
 		}
-		System.out.println(cost);
 	}
 
 	static void print() {

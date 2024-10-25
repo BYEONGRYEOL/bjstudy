@@ -6,16 +6,23 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_4690_완전세제곱 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int[] cube = new int[101];
+		for (int i = 1; i < 101; i++) {
+			cube[i] = (int)Math.pow(i, 3);
 		}
-		System.out.println(cost);
+		for (int a = 2; a <= 100; a++)
+			for (int b = 2; b <= 100; b++)
+				for (int c = b+1; c <= 100; c++)
+					for (int d = c+1; d <= 100; d++)
+						if (cube[a] == cube[b] + cube[c] + cube[d])
+							sb.append(String.format("Cube = %d, Triple = (%d,%d,%d)\n", a, b, c, d));
+		print();
 	}
 
 	static void print() {

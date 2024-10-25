@@ -6,16 +6,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_3460_이진수 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int iter = scan.nextInt();
+		for (int i = 0; i < iter; i++) {
+			int num = scan.nextInt();
+			int idx = 0;
+			while(num >0){
+				if(num% 2 == 1){
+					sb.append(idx).append(' ');
+				}
+				num /=2;
+				idx++;
+			}
+			sb.append('\n');
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {

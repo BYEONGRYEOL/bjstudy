@@ -6,16 +6,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_2460_지능형기차2 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int max = 0;
+		int cur = 0;
+		for (int i = 0; i < 10; i++) {
+			cur -= scan.nextInt();
+			cur += scan.nextInt();
+			max = Math.max(max, cur);
 		}
-		System.out.println(cost);
+		System.out.println(max);
 	}
 
 	static void print() {
@@ -74,4 +78,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

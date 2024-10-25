@@ -8,14 +8,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_23972_악마의제안 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		// (X - K) * N >= X 가 되는 최소의 X
+		// XN - KN - X >= 0
+		// X(N-1) - KN >= 0
+		// X >= KN / N-1
+		int k = scan.nextInt();
+		int n = scan.nextInt();
+
+		if(n==1){
+			System.out.println(-1);
+			return;
 		}
-		System.out.println(cost);
+
+		long x = (long)k * (long)n / (n - 1);
+		if((long)k * (long)n % (n - 1) > 0) x++;
+		System.out.println(x);
+
 	}
 
 	static void print() {
@@ -74,4 +85,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

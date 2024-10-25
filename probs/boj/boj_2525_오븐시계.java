@@ -8,14 +8,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_2525_오븐시계 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
-		}
-		System.out.println(cost);
+		int timeMin = scan.nextInt() * 60 + scan.nextInt();
+		timeMin += scan.nextInt();
+		timeMin = Math.floorMod(timeMin, 24 * 60);
+		System.out.println(timeMin / 60 + " " + timeMin % 60);
 	}
 
 	static void print() {
@@ -74,4 +73,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

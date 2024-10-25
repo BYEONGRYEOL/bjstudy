@@ -8,14 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_31833_온데간데없을뿐더러 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		scan.nextInt();
+		String[] numbers = new String[2];
+		for (int i = 0; i < 2; i++) {
+			numbers[i] = scan.nextLine().replaceAll(" ", "");
 		}
-		System.out.println(cost);
+		if(numbers[0].length() == numbers[1].length()){
+			System.out.println(numbers[0].compareTo(numbers[1]) < 0 ? numbers[0] : numbers[1]);
+		} else{
+			System.out.println(numbers[0].length() < numbers[1].length() ? numbers[0] : numbers[1]);
+		}
 	}
 
 	static void print() {
@@ -74,4 +79,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

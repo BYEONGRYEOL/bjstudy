@@ -6,16 +6,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_1247_부호 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		for (int i = 0; i < 3; i++) {
+			int N = scan.nextInt();
+			BigInteger sum = BigInteger.ZERO;
+			for (int j = 0; j < N; j++) {
+				sum = sum.add(new BigInteger(scan.nextLine()));
+			}
+			int compare = sum.compareTo(BigInteger.ZERO);
+			System.out.println(compare < 0 ? '-' : (compare == 0 ? '0' : '+'));
 		}
-		System.out.println(cost);
 	}
 
 	static void print() {
@@ -74,4 +79,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

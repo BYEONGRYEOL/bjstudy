@@ -8,14 +8,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_11721_열개씩끊어출력하기 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		String line = scan.nextLine();
+		int n = line.length();
+		int idx = 0;
+		while(idx <n / 10){
+			sb.append(line, idx * 10, (idx+1) * 10).append('\n');
+			idx++;
 		}
-		System.out.println(cost);
+		sb.append(line.substring(idx*10));
+		print();
 	}
 
 	static void print() {
@@ -74,4 +78,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

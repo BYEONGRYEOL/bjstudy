@@ -1,21 +1,33 @@
 package probs.boj;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_2738_행렬덧셈 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		int m = scan.nextInt();
+		int[][] matrix = new int[n][m];
+		for (int k = 0; k < 2; k++) {
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < m; j++) {
+					matrix[i][j] += scan.nextInt();
+				}
+			}
 		}
-		System.out.println(cost);
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				sb.append(matrix[i][j]).append(' ');
+			}
+			sb.append('\n');
+		}
+		print();
+
 	}
 
 	static void print() {
@@ -31,7 +43,7 @@ public class boj_25403_영수증 {
 		}
 
 		public FastReader(String s) throws FileNotFoundException {
-			br = new BufferedReader(new FileReader(new File(s)));
+			br = new BufferedReader(new FileReader(s));
 		}
 
 		String next() {
@@ -74,4 +86,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

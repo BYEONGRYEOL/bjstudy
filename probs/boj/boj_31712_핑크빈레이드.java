@@ -8,14 +8,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_31712_핑크빈레이드 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int[] time = new int[3];
+		int[] damage = new int[3];
+		for (int i = 0; i < 3; i++) {
+			time[i] = scan.nextInt();
+			damage[i] = scan.nextInt();
 		}
-		System.out.println(cost);
+		int t = -1;
+		int hp = scan.nextInt();
+		while(hp >0){
+			t++;
+			for (int i = 0; i < 3; i++) {
+				if(t % time[i] == 0){
+					hp -= damage[i];
+				}
+			}
+		}
+		System.out.println(t);
 	}
 
 	static void print() {
@@ -74,4 +86,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

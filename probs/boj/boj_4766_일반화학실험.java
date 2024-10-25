@@ -8,14 +8,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_4766_일반화학실험 {
 
-	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+	static void input() {
+		double temperature = scan.nextDouble();
+		while(true){
+			double nextTemperature = scan.nextDouble();
+			if(nextTemperature == 999d) break;
+			sb.append(nextTemperature - temperature).append('\n');
+			temperature = nextTemperature;
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {
@@ -68,10 +71,11 @@ public class boj_25403_영수증 {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		input();
 	}
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

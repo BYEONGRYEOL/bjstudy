@@ -8,14 +8,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_24264_알고리즘수업_알고리즘의수행시간3 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
-		}
-		System.out.println(cost);
+		long num = scan.nextLong();
+		System.out.println(num * num / 2);
+		System.out.println(2);
 	}
 
 	static void print() {

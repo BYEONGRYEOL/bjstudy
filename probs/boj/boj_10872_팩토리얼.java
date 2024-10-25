@@ -8,14 +8,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_10872_팩토리얼 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
-		}
-		System.out.println(cost);
+		System.out.println(fact(scan.nextInt()));
+	}
+	static int fact(int n){
+		if(n==0) return 1;
+		if(n == 1) return 1;
+		return n * fact(n-1);
 	}
 
 	static void print() {

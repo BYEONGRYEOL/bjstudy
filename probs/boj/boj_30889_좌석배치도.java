@@ -6,16 +6,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_30889_좌석배치도 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		char[][] seats = new char[10][20];
+		for (int i = 0; i < 10; i++) {
+			Arrays.fill(seats[i],'.');
 		}
-		System.out.println(cost);
+		for (int i = 0; i < n; i++) {
+			String seat = scan.nextLine();
+			int row = seat.charAt(0) - 'A';
+			int col = Integer.parseInt(seat.substring(1)) - 1;
+			seats[row][col] = 'o';
+		}
+		Arrays.stream(seats).forEachOrdered(System.out::println);
 	}
 
 	static void print() {
@@ -74,4 +82,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

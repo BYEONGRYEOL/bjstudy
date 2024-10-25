@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_10179_쿠폰 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int iter = scan.nextInt();
+		for (int i = 0; i < iter; i++) {
+			double cost = scan.nextDouble();
+			System.out.printf("$%.2f\n", cost * 0.8);
 		}
-		System.out.println(cost);
 	}
 
 	static void print() {
@@ -74,4 +74,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

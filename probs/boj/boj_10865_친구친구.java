@@ -6,16 +6,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
+import java.util.stream.IntStream;
 
-public class boj_25403_영수증 {
+public class boj_10865_친구친구 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		int[] friendsCount = new int[n+1];
+		int m = scan.nextInt();
+
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < 2; j++) {
+				friendsCount[scan.nextInt()]++;
+			}
 		}
-		System.out.println(cost);
+		IntStream.rangeClosed(1, n).forEachOrdered(d->sb.append(friendsCount[d]).append('\n'));
+		print();
 	}
 
 	static void print() {
@@ -74,4 +82,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

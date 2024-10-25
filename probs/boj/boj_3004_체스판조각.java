@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_3004_체스판조각 {
+
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
-		}
-		System.out.println(cost);
+		int N = scan.nextInt();
+		int row = N / 2;
+		int col = N - row;
+		System.out.println((row+1) * (col+1));
 	}
 
 	static void print() {
@@ -74,4 +74,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

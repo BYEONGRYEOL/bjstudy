@@ -8,14 +8,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_27736_찬반투표 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		// +1 씩, 0반대 1기권 2찬성
+		int[] result = new int[3];
+		for (int i = 0; i < n; i++) {
+			result[scan.nextInt()+1] ++;
 		}
-		System.out.println(cost);
+		if(result[1] >= n/2){
+			System.out.println("INVALID");
+		} else{
+			System.out.println(result[2] > result[0] ? "APPROVED" : "REJECTED");
+		}
 	}
 
 	static void print() {
@@ -74,4 +80,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

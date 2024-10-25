@@ -8,15 +8,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
-
+public class boj_20361_일우는야바위꾼 {
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int cups = scan.nextInt();
+		int target = scan.nextInt();
+		int iter = scan.nextInt();
+
+		for (int i = 0; i < iter; i++) {
+			int a = scan.nextInt();
+			int b = scan.nextInt();
+			if(target == a){
+				target = b;
+			} else if(target == b){
+				target = a;
+			}
 		}
-		System.out.println(cost);
+		System.out.println(target);
+
 	}
+
 
 	static void print() {
 		System.out.print(sb.toString());
@@ -74,4 +84,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }
