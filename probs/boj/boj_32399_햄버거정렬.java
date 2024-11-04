@@ -6,16 +6,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_32399_햄버거정렬 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
-		}
-		System.out.println(cost);
+		String hamburger = scan.nextLine();
+		if(hamburger.equals("(1)")){
+			System.out.println(0);
+		} else if(hamburger.equals(")1(")){
+			System.out.println(2);
+		} else
+			System.out.println(1);
+
 	}
 
 	static void print() {
@@ -74,4 +78,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

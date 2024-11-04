@@ -8,14 +8,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_5612_터널의입구와출구 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		int carCount = scan.nextInt();
+		int maxCarCount = carCount;
+		for (int i = 0; i < n; i++) {
+			int enter = scan.nextInt();
+			int quit = scan.nextInt();
+			carCount = carCount + enter - quit;
+			maxCarCount = Math.max(maxCarCount, carCount);
+			if(carCount < 0){
+				System.out.println(0);
+				return;
+			}
 		}
-		System.out.println(cost);
+		System.out.println(maxCarCount);
 	}
 
 	static void print() {
@@ -74,4 +83,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

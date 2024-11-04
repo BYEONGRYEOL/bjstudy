@@ -8,14 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_32216_찬물샤워 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		int criteriaT = scan.nextInt();
+		int T = scan.nextInt();
+		int discomfort = 0;
+		for (int i = 0; i < n; i++) {
+			int di = scan.nextInt();
+			T = T + di + (T > criteriaT ? -1 : 1) *Math.abs(T - criteriaT);
+			discomfort += Math.abs(T - criteriaT);
 		}
-		System.out.println(cost);
+		System.out.println(discomfort);
 	}
 
 	static void print() {
@@ -74,4 +79,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

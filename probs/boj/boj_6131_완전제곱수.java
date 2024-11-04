@@ -8,14 +8,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_6131_완전제곱수 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
-		}
-		System.out.println(cost);
+		// a^2은 b^2보다 N만큼 크다
+		int N = scan.nextInt();
+		int count = 0;
+		for (int b = 1; b <= 500; b++)
+			for (int a = 1; a <= 500; a++)
+				if(a*a - b*b == N)
+					count++;
+		System.out.println(count);
 	}
 
 	static void print() {
@@ -74,4 +77,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

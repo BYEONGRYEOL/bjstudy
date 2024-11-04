@@ -8,14 +8,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_32342_와우와쿼리 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int Q = scan.nextInt();
+		for (int i = 0; i < Q; i++) {
+			String line = scan.nextLine();
+			int wowCount =0;
+			for (int j = 0; j < line.length()-2; j++) {
+				if(line.startsWith("WOW", j))
+					wowCount++;
+			}
+			sb.append(wowCount).append('\n');
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {
@@ -74,4 +80,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

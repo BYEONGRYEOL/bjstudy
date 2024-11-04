@@ -6,16 +6,27 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_20540_연길이의이상형 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		String mbti = scan.next();
+		Map<Character, Character> map = Map.of(
+			'E', 'I',
+			'I','E',
+			'S','N',
+			'N','S',
+			'T','F',
+			'F','T',
+			'J','P',
+			'P','J'
+		);
+		for (int i = 0; i < 4; i++) {
+			sb.append(map.get(mbti.charAt(i)));
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {

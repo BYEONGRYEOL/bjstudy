@@ -6,16 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_2061_좋은암호 {
+
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		BigInteger K = new BigInteger(scan.next());
+		int L = scan.nextInt();
+		for (int i = 2	; i <L ; i++) {
+			if(K.mod(BigInteger.valueOf(i)).equals(BigInteger.ZERO)) {
+				System.out.println("BAD " +i);
+				return;
+			}
 		}
-		System.out.println(cost);
+		System.out.println("GOOD");
 	}
 
 	static void print() {
@@ -74,4 +80,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

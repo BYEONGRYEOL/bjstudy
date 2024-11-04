@@ -8,14 +8,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_20410_추첨상사수대작전easy {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int m = scan.nextInt();
+		int seed = scan.nextInt();
+		int x1 = scan.nextInt();
+		int x2 = scan.nextInt();
+		//X1 = (a × Seed + c) % m
+		//
+		// X2 = (a × X1 + c) % m
+
+		for (int a = 0; a < m; a++) {
+			for (int c = 0; c < m; c++) {
+				if((a*seed + c) % m == x1 && (a*x1 + c) % m == x2) {
+					System.out.println(a + " " + c);
+					return;
+				}
+			}
 		}
-		System.out.println(cost);
 	}
 
 	static void print() {

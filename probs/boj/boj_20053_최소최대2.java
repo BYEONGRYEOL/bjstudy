@@ -8,14 +8,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_20053_최소최대2 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int iter = scan.nextInt();
+		for (int i = 0; i < iter; i++) {
+			int n = scan.nextInt();
+			int min = Integer.MAX_VALUE;
+			int max = Integer.MIN_VALUE;
+			for (int j = 0; j < n; j++) {
+				int num = scan.nextInt();
+				min = Math.min(min, num);
+				max = Math.max(max, num);
+			}
+			sb.append(min).append(" ").append(max).append("\n");
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {

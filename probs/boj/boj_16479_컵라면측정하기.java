@@ -6,16 +6,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_16479_컵라면측정하기 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
-		}
-		System.out.println(cost);
+		int K = scan.nextInt();
+		double d1 = scan.nextInt();
+		double d2 = scan.nextInt();
+		System.out.println(K*K - Math.pow((d1/2 - d2/2), 2));
 	}
 
 	static void print() {
@@ -74,4 +74,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

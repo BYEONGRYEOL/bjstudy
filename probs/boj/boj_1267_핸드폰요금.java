@@ -8,14 +8,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_1267_핸드폰요금 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		// Y 30초마다 10
+		// M 60초마다 15
+		int iter  = scan.nextInt();
+		int y = 0;
+		int m = 0;
+		for (int i = 0; i < iter; i++) {
+			int time = scan.nextInt();
+			m += (time / 60 + 1) * 15;
+			y += (time / 30 + 1) * 10;
 		}
-		System.out.println(cost);
+		System.out.println(y < m ? "Y " + y : (y == m) ? "Y M "+m : "M " + m);
 	}
 
 	static void print() {
@@ -74,4 +80,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

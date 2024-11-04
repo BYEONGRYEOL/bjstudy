@@ -7,15 +7,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+import java.util.stream.IntStream;
 
-public class boj_25403_영수증 {
+public class boj_12840_창용이의시계 {
+	static int day = 60 * 60 * 24;
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int sec = 0;
+		sec += scan.nextInt() * 60 * 60;
+		sec += scan.nextInt() * 60;
+		sec += scan.nextInt();
+		int iter = scan.nextInt();
+		for (int i = 0; i < iter; i++) {
+			int T = scan.nextInt();
+			if (T == 3) {
+				sb.append(String.format("%d %d %d\n", sec / 3600, sec % 3600 / 60, sec % 60));
+			} else {
+				sec = Math.floorMod(sec + scan.nextInt() * (T == 1 ? 1 : -1), day);
+			}
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {

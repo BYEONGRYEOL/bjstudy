@@ -8,14 +8,48 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_15784_질투진서 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		int row = scan.nextInt()-1;
+		int col = scan.nextInt()-1;
+		int[][] array = new int[n][n];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				array[i][j] = scan.nextInt();
+			}
 		}
-		System.out.println(cost);
+		int jinseoCharm = array[row][col];
+		boolean angry = false;
+		for (int i = 0; i < n; i++) {
+			if(jinseoCharm <array[i][col]){
+				angry = true;
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			if(jinseoCharm <array[row][i]){
+				angry = true;
+			}
+		}
+		System.out.println(angry? "ANGRY":"HAPPY");
+	}
+
+
+	static int calculateK(int n, int m) {
+		int calculateK = 0;
+		for (int i = 1; i <= n; i++) {
+			calculateK += Math.min(m / i, n);
+		}
+		return calculateK;
+	}
+
+	static long lessThanCount(long n, long x) {
+		long count = 0;
+		for (int i = 1; i <= n; i++) {
+			count += Math.min(n, x / i);
+		}
+		return count;
 	}
 
 	static void print() {
@@ -74,4 +108,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

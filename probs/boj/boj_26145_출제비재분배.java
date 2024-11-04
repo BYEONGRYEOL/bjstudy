@@ -6,17 +6,29 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_26145_출제비재분배 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int makeExam = scan.nextInt();
+		int tester = scan.nextInt();
+		int[] money = new int[makeExam+tester];
+		for (int i = 0; i < makeExam; i++) {
+			money[i] = scan.nextInt();
 		}
-		System.out.println(cost);
+		for (int i = 0; i < makeExam; i++) {
+			for (int j = 0; j < makeExam + tester; j++) {
+				int pass = scan.nextInt();
+				money[i] -= pass;
+				money[j] += pass;
+			}
+		}
+		Arrays.stream(money).forEachOrdered(d -> sb.append(d).append(" "));
+		print();
 	}
+
 
 	static void print() {
 		System.out.print(sb.toString());
@@ -74,4 +86,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

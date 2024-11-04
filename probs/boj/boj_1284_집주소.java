@@ -8,14 +8,28 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_1284_집주소 {
+
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		
+		while(true){
+			String number = scan.nextLine();
+			if(number.equals("0")) break;
+			int width = number.length()+1;
+			for (int i = 0; i < number.length(); i++) {
+				int num = number.charAt(i) - '0';
+				if(num == 1){
+					width +=2;
+				} else if (num == 0){
+					width +=4;
+				} else{
+					width +=3;
+				}
+			}
+			sb.append(width).append('\n');
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {
@@ -74,4 +88,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

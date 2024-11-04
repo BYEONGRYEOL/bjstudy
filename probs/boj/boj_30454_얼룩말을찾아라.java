@@ -6,16 +6,37 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_30454_얼룩말을찾아라 {
 
-	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+	static void input() {
+		int iter = scan.nextInt();
+		int len = scan.nextInt();
+		int maxBlackLineCount = 0;
+		int maxBlackLineIndividualCount = 0;
+		for (int i = 0; i < iter; i++) {
+			String zebra = scan.nextLine();
+			char now = '0';
+			int blackLineCount = 0;
+			for (int j = 0; j < len; j++) {
+				if(now == '0' && zebra.charAt(j) == '1'){
+					blackLineCount++;
+				}
+				now = zebra.charAt(j);
+			}
+			if(blackLineCount > maxBlackLineCount){
+				maxBlackLineCount = blackLineCount;
+				maxBlackLineIndividualCount = 1;
+			} else if(blackLineCount == maxBlackLineCount){
+				maxBlackLineIndividualCount++;
+			}
 		}
-		System.out.println(cost);
+		sb.append(maxBlackLineCount).append(' ').append(maxBlackLineIndividualCount);
+		print();
 	}
 
 	static void print() {
@@ -68,10 +89,11 @@ public class boj_25403_영수증 {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		input();
 	}
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

@@ -8,14 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_2490_윷놀이 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+
+		char[] result = {'E','A','B','C','D'};
+		for (int i = 0; i < 3; i++) {
+			int backCount = 0;
+			for (int j = 0; j < 4; j++) {
+				backCount+= scan.nextInt();
+			}
+			sb.append(result[result.length -1 -backCount]).append('\n');
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {
@@ -74,4 +79,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

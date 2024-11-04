@@ -8,14 +8,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_3058_짝수를찾아라 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int iter = scan.nextInt();
+		for (int i = 0; i < iter; i++) {
+			int sumEven = 0;
+			int minEven = Integer.MAX_VALUE;
+			for (int j = 0; j < 7; j++) {
+				int num = scan.nextInt();
+				if(num % 2 == 0){
+					sumEven += num;
+					minEven = Math.min(minEven, num);
+				}
+			}
+			sb.append(sumEven).append(' ').append(minEven).append('\n');
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {

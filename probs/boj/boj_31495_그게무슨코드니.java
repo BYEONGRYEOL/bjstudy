@@ -12,7 +12,7 @@ public class boj_31495_그게무슨코드니 {
 
 	static void input() throws Exception {
 		String line = scan.nextLine();
-		if(line.charAt(0) == '"' && line.charAt(line.length()-1) == '"' && line.length() >2){
+		if(line.charAt(0) == '"' && line.charAt(line.length()-1) == '"'){
 			System.out.println(line.substring(1, line.length()-1));
 		} else{
 			System.out.println("CE");

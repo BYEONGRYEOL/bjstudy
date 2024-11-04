@@ -6,16 +6,28 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_21866_추첨을통해커피를받자 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
+		//100점, 100점, 200점, 200점, 300점, 300점, 400점, 400점, 500
+		int[] maxScore = {100,100,200,200,300,300,400,400,500};
+		int sum = 0;
 		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+			int score = scan.nextInt();
+			if(maxScore[i] < score){
+				System.out.println("hacker");
+				return;
+			}
+			sum += score;
 		}
-		System.out.println(cost);
+		if(sum >= 100){
+			System.out.println("draw");
+		} else{
+			System.out.println("none");
+		}
 	}
 
 	static void print() {

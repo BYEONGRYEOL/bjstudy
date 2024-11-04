@@ -8,14 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_25703_포인터공부 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int N = scan.nextInt();
+		if (N == 1) {
+			sb.append("int a;\n" + "int *ptr = &a;\n");
+		} else {
+			sb.append("int a;\n" + "int *ptr = &a;\n" + "int **ptr2 = &ptr;\n");
+			for (int i = 2; i < N; i++) {
+				sb.append(String.format("int %sptr%d = &ptr%d;\n", "*".repeat(i + 1), i + 1, i));
+			}
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {
@@ -74,4 +79,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

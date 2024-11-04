@@ -8,14 +8,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_29752_최장스트릭 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int N = scan.nextInt();
+		int streak = 0;
+		int maxStreak = 0;
+		for (int i = 0; i < N; i++) {
+			if(scan.nextInt() == 0){
+				streak =0;
+			}else
+				streak++;
+			maxStreak = Math.max(maxStreak, streak);
 		}
-		System.out.println(cost);
+		System.out.println(maxStreak);
 	}
 
 	static void print() {

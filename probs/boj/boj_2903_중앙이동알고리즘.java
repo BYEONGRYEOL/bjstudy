@@ -6,16 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_2903_중앙이동알고리즘 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		// 0 2제곱
+		// 1 3 제곱
+		// 2 5제곱
+		// 3 9 제곱
+		int N = scan.nextInt();
+		int num = 3;
+		for (int i = 1; i < N; i++) {
+			num = 2 * num - 1;
 		}
-		System.out.println(cost);
+		System.out.println(num * num);
 	}
 
 	static void print() {
@@ -74,4 +80,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

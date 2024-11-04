@@ -8,14 +8,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_15923_욱제는건축왕이야 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int N = scan.nextInt();
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int sx = x;
+		int sy = y;
+		int round = 0;
+		for (int i = 1; i < N; i++) {
+			int nx = scan.nextInt();
+			int ny = scan.nextInt();
+			round += Math.abs(nx -x);
+			round += Math.abs(ny - y);
+			x = nx;
+			y = ny;
 		}
-		System.out.println(cost);
+		round += Math.abs(sx -x);
+		round += Math.abs(sy - y);
+		System.out.println(round);
 	}
 
 	static void print() {
@@ -74,4 +86,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

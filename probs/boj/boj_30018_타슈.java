@@ -6,16 +6,28 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_30018_타슈 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int N = scan.nextInt();
+		int[] diff  = new int[N];
+		for (int i = 0; i <N; i++) {
+			diff[i] = scan.nextInt();
 		}
-		System.out.println(cost);
+		for (int i = 0; i < N; i++) {
+			diff[i] = diff[i] - scan.nextInt();
+		}
+		int result = 0;
+		for (int i = 0; i < N; i++) {
+			result += Math.max(diff[i], 0);
+		}
+		System.out.println(result);
+
 	}
 
 	static void print() {
@@ -74,4 +86,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

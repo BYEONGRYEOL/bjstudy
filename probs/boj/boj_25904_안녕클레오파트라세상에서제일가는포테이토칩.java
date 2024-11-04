@@ -8,14 +8,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_25904_안녕클레오파트라세상에서제일가는포테이토칩 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		int pitch = scan.nextInt();
+		int[] maxNote = new int[n];
+		for (int i = 0; i < n; i++) {
+			maxNote[i] = scan.nextInt();
 		}
-		System.out.println(cost);
+		int turn = 0;
+		while (true) {
+			if (maxNote[turn % n] < pitch) {
+				System.out.println(turn % n + 1);
+				return;
+			}
+			turn++;
+			pitch++;
+		}
 	}
 
 	static void print() {

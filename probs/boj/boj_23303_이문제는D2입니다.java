@@ -8,14 +8,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_23303_이문제는D2입니다 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
-		}
-		System.out.println(cost);
+		String line = scan.nextLine();
+		System.out.println(line.contains("d2") || line.contains("D2") ? "D2" : "unrated");
 	}
 
 	static void print() {
@@ -74,4 +71,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

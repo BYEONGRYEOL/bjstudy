@@ -6,16 +6,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_4153_직각삼각형 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int[] len = new int[3];
+		while(true){
+			for (int i = 0; i < 3; i++) {
+				len[i] = scan.nextInt();
+			}
+			if(len[0] == 0) break;
+			Arrays.sort(len);
+			if(len[2] *len[2] == len[0] * len[0] + len[1] * len[1]) {
+				sb.append("right").append('\n');
+			}else sb.append("wrong").append('\n');
 		}
-		System.out.println(cost);
+		print();
 	}
 
 	static void print() {

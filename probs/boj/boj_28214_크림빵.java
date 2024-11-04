@@ -6,16 +6,29 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_28214_크림빵 {
+
+
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int N = scan.nextInt();
+		int K = scan.nextInt();
+		int P = scan.nextInt();
+		int canSell = 0;
+		for (int i = 0; i < N; i++) {
+			int creamCount = 0;
+			for (int j = 0; j < K; j++) {
+				creamCount += scan.nextInt();
+			}
+			if(K - creamCount < P){
+				canSell ++;
+			}
 		}
-		System.out.println(cost);
+		System.out.println(canSell);
 	}
 
 	static void print() {
@@ -74,4 +87,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }

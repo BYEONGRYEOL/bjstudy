@@ -6,16 +6,38 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class boj_25403_영수증 {
+public class boj_2476_주사위게임 {
 
 	static void input() throws Exception {
-		int cost = scan.nextInt();
-		for (int i = 0; i < 9; i++) {
-			cost -= scan.nextInt();
+		int n = scan.nextInt();
+		int maxPrize = 0;
+		for (int i = 0; i < n; i++) {
+			int[] dice = new int[3];
+			int prize = 0;
+			for (int j = 0; j < 3; j++) {
+				dice[j] = scan.nextInt();
+			}
+			Arrays.sort(dice);
+			if (dice[0] == dice[1] && dice[1] == dice[2]) {
+				prize = 10000 + dice[0] * 1000;
+			} else if (dice[0] == dice[1]) {
+				prize = 1000 + dice[0] * 100;
+			} else if (dice[1] == dice[2]) {
+				prize = 1000 + dice[1] * 100;
+			} else if (dice[2] == dice[0]) {
+				prize = 1000 + dice[2] * 100;
+			} else {
+				prize = dice[2] * 100;
+			}
+			maxPrize = Math.max(maxPrize, prize);
 		}
-		System.out.println(cost);
+		System.out.println(maxPrize);
 	}
 
 	static void print() {
@@ -74,4 +96,5 @@ public class boj_25403_영수증 {
 
 	static FastReader scan = new FastReader();
 	static StringBuilder sb = new StringBuilder();
+
 }
