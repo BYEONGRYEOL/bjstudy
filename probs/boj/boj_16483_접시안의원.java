@@ -8,14 +8,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_16483_접시안의원 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
-		}
-		System.out.println(total / 5);
+		System.out.println(Math.round(Math.pow(scan.nextDouble() / 2, 2)));
 	}
 
 	static void print() {

@@ -6,16 +6,31 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_5691_평균중앙값문제 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		// a, b
+		// mean = (a+b+x) / 3
+		// 
+		// 3mid = 3mean = a+b+x
+		// x = 3mid - a - b
+		// if mid == x : x = (a+b)/2
+		// if mid == a : x = 2a -b
+		// if mid == b : x = 2b - a
+		while (true) { 
+			int[] array = new int[2];
+			array[0] = scan.nextInt();
+			array[1] = scan.nextInt();
+			if(array[0]==0 && array[1]== 0){
+				break;
+			}
+			Arrays.sort(array);
+			System.out.println(2 * array[0] - array[1]);
 		}
-		System.out.println(total / 5);
+		
 	}
 
 	static void print() {

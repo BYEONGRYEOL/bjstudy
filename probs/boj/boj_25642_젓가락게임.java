@@ -8,14 +8,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
-
+public class boj_25642_젓가락게임 {
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int p1FingerCount = scan.nextInt();
+		int p2FingerCount = scan.nextInt();
+		boolean p1Turn = true;
+		while(true){
+			if(p1Turn){
+				p2FingerCount += p1FingerCount;
+			} else{
+				p1FingerCount += p2FingerCount;
+			}
+			if(p1FingerCount >= 5 || p2FingerCount >= 5){
+				break;
+			}
+			p1Turn = !p1Turn;
 		}
-		System.out.println(total / 5);
+		System.out.println(p1Turn ? "yt" : "yj");
 	}
 
 	static void print() {

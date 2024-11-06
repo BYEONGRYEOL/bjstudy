@@ -8,14 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_10988_펠린드롬인지확인하기 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		
+		String line = scan.nextLine();
+		int isPalindrome = 1;
+		for (int i = 0; i < line.length() / 2; i++) {
+			if(line.charAt(i) != line.charAt(line.length() - 1 -i)){
+				isPalindrome = 0;
+				break;
+			}
 		}
-		System.out.println(total / 5);
+		System.out.println(isPalindrome);
 	}
 
 	static void print() {

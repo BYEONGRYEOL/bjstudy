@@ -8,14 +8,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
-
+public class boj_10103_주사위게임 {
+	
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+
+		int iter = scan.nextInt();
+		int changyeongScore = 100;
+		int sangdeokScore = 100;
+		for (int i = 0; i < iter; i++) {
+			int changyeong = scan.nextInt();
+			int sangdeok = scan.nextInt();
+			if(changyeong < sangdeok){
+				changyeongScore -= sangdeok;
+			} else if (changyeong > sangdeok){
+				sangdeokScore -= changyeong;
+			}
 		}
-		System.out.println(total / 5);
+		System.out.println(changyeongScore + " " + sangdeokScore);
 	}
 
 	static void print() {

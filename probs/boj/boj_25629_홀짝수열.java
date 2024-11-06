@@ -8,14 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_25629_홀짝수열 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int n = scan.nextInt();
+		int oddCount = 0;
+		for (int i = 0; i < n; i++) {
+			oddCount += scan.nextInt() % 2 == 1 ? 1 : 0;
 		}
-		System.out.println(total / 5);
+		if(Math.ceil((double)n / 2) == oddCount)
+			System.out.println(1);
+		else
+			System.out.println(0);
+
 	}
 
 	static void print() {

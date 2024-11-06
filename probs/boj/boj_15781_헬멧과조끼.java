@@ -8,14 +8,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_15781_헬멧과조끼 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int iter1 = scan.nextInt();
+		int iter2 = scan.nextInt();
+		int max1 = 0;
+		int max2 = 0;
+		for (int i = 0; i < iter1; i++) {
+			max1 = Math.max(scan.nextInt(), max1);
 		}
-		System.out.println(total / 5);
+		for (int i = 0; i < iter2; i++) {
+			max2 = Math.max(scan.nextInt(), max2);
+		}
+		System.out.println(max1+max2);
 	}
 
 	static void print() {

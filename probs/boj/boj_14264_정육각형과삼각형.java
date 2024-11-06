@@ -8,14 +8,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
-
+public class boj_14264_정육각형과삼각형 {
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
-		}
-		System.out.println(total / 5);
+		int n = scan.nextInt();
+		double w = n * Math.sin(Math.toRadians(60));
+		double h = n * Math.cos(Math.toRadians(60));
+		System.out.println(w * h);
+		
 	}
 
 	static void print() {

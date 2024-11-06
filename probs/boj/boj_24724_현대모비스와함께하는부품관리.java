@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_24724_현대모비스와함께하는부품관리 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int iter = scan.nextInt();
+		for (int i = 0; i < iter; i++) {
+			System.out.println("Material Management " + (i+1));
+			System.out.println("Classification ---- End!");
 		}
-		System.out.println(total / 5);
 	}
 
 	static void print() {

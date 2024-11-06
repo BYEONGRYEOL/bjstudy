@@ -8,14 +8,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_2576_홀수 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int minOdd = Integer.MAX_VALUE;
+		int sumOdd = 0;
+		for (int i = 0; i < 7; i++) {
+			int num = scan.nextInt();
+			if(num%2==1){
+				sumOdd += num;
+				minOdd = Math.min(num, minOdd);
+			}
 		}
-		System.out.println(total / 5);
+		if(sumOdd == 0){
+			System.out.println(-1);
+		}else{
+			System.out.println(sumOdd);
+			System.out.println(minOdd);
+		}
+		
 	}
 
 	static void print() {

@@ -7,15 +7,29 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+import javax.naming.InterruptedNamingException;
 
-public class boj_10039_평균점수 {
+public class boj_21312_홀짝칵테일 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int[] num = new int[3];
+		boolean[] oddOrEven = new boolean[3];
+		int result = 1;
+		for (int i = 0; i < 3; i++) {
+			num[i] = scan.nextInt();
+			oddOrEven[i] = num[i] % 2 == 1;
 		}
-		System.out.println(total / 5);
+		for(int i = 0 ; i < 3 ; i++){
+			if(oddOrEven[i]){
+				result *= num[i];
+			}
+		}
+		if(result == 1){
+			for(int i = 0 ; i < 3 ; i++){
+				result *= num[i];
+			}
+		}
+		System.out.println(result);
 	}
 
 	static void print() {

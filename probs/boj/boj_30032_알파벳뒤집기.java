@@ -6,16 +6,36 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_30032_알파벳뒤집기 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		Map<Character, Character> upDownMapper = Map.of(
+			'd', 'q',
+			'b','p',
+			'q','d',
+			'p','b'
+		);
+		Map<Character, Character> leftRightMapper = Map.of(
+			'd', 'b',
+			'b','d',
+			'q','p',
+			'p','q'
+		);
+		
+		int iter = scan.nextInt();
+		int dir = scan.nextInt();
+		for (int i = 0; i < iter; i++) {
+			String line = scan.nextLine();
+			for (int j = 0; j < line.length(); j++) {
+				sb.append(dir == 1 ? upDownMapper.get(line.charAt(j)) : leftRightMapper.get(line.charAt(j)));
+			}
+			sb.append('\n');
 		}
-		System.out.println(total / 5);
+		print();
+
 	}
 
 	static void print() {

@@ -6,16 +6,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_24266_알고리즘수업_알고리즘의수행시간5 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
-		}
-		System.out.println(total / 5);
+		long n = scan.nextLong();
+		System.out.println(BigInteger.valueOf(n).pow(3));
+		System.out.println(3);
+
 	}
 
 	static void print() {

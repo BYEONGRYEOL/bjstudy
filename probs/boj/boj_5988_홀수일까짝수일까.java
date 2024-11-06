@@ -8,14 +8,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_5988_홀수일까짝수일까 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int n = scan.nextInt();
+		for (int i = 0; i < n; i++) {
+			String number = scan.nextLine();
+			sb.append((number.charAt(number.length()-1) - '0') % 2 == 1 ? "odd" : "even").append('\n');
 		}
-		System.out.println(total / 5);
+		print();
 	}
 
 	static void print() {

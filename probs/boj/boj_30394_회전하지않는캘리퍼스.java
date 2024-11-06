@@ -8,14 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_30394_회전하지않는캘리퍼스 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int iter = scan.nextInt();
+		int maxY = Integer.MIN_VALUE;
+		int minY = Integer.MAX_VALUE;
+		for (int i = 0; i < iter; i++) {
+			scan.nextInt();
+			int y = scan.nextInt();
+			maxY = Math.max(maxY, y);
+			minY = Math.min(minY, y);
 		}
-		System.out.println(total / 5);
+		System.out.println(maxY - minY);
 	}
 
 	static void print() {

@@ -8,14 +8,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_10599_페르시아의왕들 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		
+		while (true) { 
+			int birthYearL = scan.nextInt();
+			int birthYearR = scan.nextInt();
+			int deadYearL = scan.nextInt();
+			int deadYearR = scan.nextInt();
+			
+			if(birthYearL == 0 && birthYearR == 0 && deadYearL == 0 && deadYearR == 0){
+				break;
+			}
+			sb.append(deadYearL - birthYearR).append(' ').append(deadYearR - birthYearL).append('\n');
 		}
-		System.out.println(total / 5);
+		print();
 	}
 
 	static void print() {

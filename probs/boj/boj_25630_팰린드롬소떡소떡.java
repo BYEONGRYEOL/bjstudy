@@ -8,14 +8,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
+public class boj_25630_팰린드롬소떡소떡 {
 
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		int len = scan.nextInt();
+		char[] line = scan.nextLine().toCharArray();
+		int magic = 0;
+		for (int i = 0; i < len / 2; i++) {
+			if(line[i] != line[len-1-i]){
+				magic ++;
+			}
 		}
-		System.out.println(total / 5);
+		System.out.println(magic);
 	}
 
 	static void print() {

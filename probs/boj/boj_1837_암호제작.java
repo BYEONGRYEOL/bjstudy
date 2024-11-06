@@ -6,17 +6,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class boj_10039_평균점수 {
-
+public class boj_1837_암호제작 {
 	static void input() throws Exception {
-		int total = 0;
-		for (int i = 0; i < 5; i++) {
-			total += Math.max(scan.nextInt(), 40);
+		String[] numbers = scan.nextLine().split(" ");
+		BigInteger password = new BigInteger(numbers[0]);
+		int K = Integer.parseInt(numbers[1]);
+		
+		for (int i = 2; i < K; i++) {
+			if(password.mod(BigInteger.valueOf(i)).equals(BigInteger.ZERO)){
+				System.out.println("BAD " + i);
+				return;
+			}
 		}
-		System.out.println(total / 5);
+		System.out.println("GOOD");
 	}
+
 
 	static void print() {
 		System.out.print(sb.toString());
