@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
 public class boj_2061_좋은암호 {
 
 
-	static void input() throws Exception {
+	static void solve() throws Exception {
 		BigInteger K = new BigInteger(scan.next());
 		int L = scan.nextInt();
 		for (int i = 2	; i <L ; i++) {
@@ -75,7 +75,7 @@ public class boj_2061_좋은암호 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();

@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class boj_17174_전체계산횟수 {
-	static void input() throws Exception {
+	static void solve() throws Exception {
 		int N = scan.nextInt();
 		int M = scan.nextInt();
 		int count = 0;
@@ -71,7 +71,7 @@ public class boj_17174_전체계산횟수 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();

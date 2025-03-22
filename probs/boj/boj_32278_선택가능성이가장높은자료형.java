@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 public class boj_32278_선택가능성이가장높은자료형 {
 
-	static void input() throws Exception {
+	static void solve() throws Exception {
 		long longNum = scan.nextLong();
 		int intNum = (int) longNum;
 		short shortNum = (short) longNum;
@@ -73,7 +73,7 @@ public class boj_32278_선택가능성이가장높은자료형 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();

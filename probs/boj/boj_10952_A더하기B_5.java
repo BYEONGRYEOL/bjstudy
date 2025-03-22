@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 public class boj_10952_A더하기B_5 {
 
-	static void input() throws Exception {
+	static void solve() throws Exception {
 		while(true){
 			int a = scan.nextInt();
 			int b = scan.nextInt();
@@ -19,7 +19,6 @@ public class boj_10952_A더하기B_5 {
 		}
 		print();
 	}
-
 
 	static void print() {
 		System.out.print(sb.toString());
@@ -72,7 +71,7 @@ public class boj_10952_A더하기B_5 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();

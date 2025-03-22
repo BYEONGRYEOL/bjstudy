@@ -10,14 +10,15 @@ import java.util.StringTokenizer;
 
 public class boj_10951_A더하기B_4 {
 
-	static void input() throws Exception {
-		String input = "";
+	static void solve() throws Exception {
+		String input ;
 		while((input = scan.nextLine()) != null){
 			int a = Integer.parseInt(input.split(" ")[0]);
 			int b = Integer.parseInt(input.split(" ")[1]);
 			sb.append(a+b).append('\n');
 		}
 		print();
+		// scan : BufferedReader 의 readLine 기반
 	}
 
 
@@ -72,7 +73,7 @@ public class boj_10951_A더하기B_4 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();

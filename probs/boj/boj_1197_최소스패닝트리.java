@@ -6,63 +6,421 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class boj_1197_최소스패닝트리 {
+	static class UnionFind {
+		static int[] parent;
 
-	static int findParent(int c, int[] parent){
-		if(c ==parent[c]) return c;
-		return findParent(parent[c], parent);
-	}
-	static boolean merge(int a, int b, int[] parent){
-		int p = findParent(a, parent);
-		int c = findParent(b, parent);
-		if(c == p){
-			return false;
-		}
-		if(c < p){
-			int temp = c;
-			c = p;
-			p = temp;
-		}
-		parent[c] = p;
-		return true;
-	}
-	static void input() throws Exception {
-		int v = scan.nextInt();
-		int e = scan.nextInt();
-		int[][] edges = new int[e][3];
-		int[] parent = new int[v+1];
-		for (int i = 0; i < v + 1; i++) {
-			parent[i] = i;
-		}
-		for (int i = 0; i < e; i++) {
-			edges[i][0] = scan.nextInt();
-			edges[i][1] = scan.nextInt();
-			edges[i][2] = scan.nextInt();
-		}
-		Arrays.sort(edges, Comparator.comparingInt(a -> a[2]));
-		int answer = 0;
-		for (int i = 0; i < e; i++) {
-			if(v == 1){
-				break;
-			}
-			int[] edge = edges[i];
-			int p = edge[0];
-			int c = edge[1];
-			boolean merged = merge(c, p, parent);
-			if(merged){
-				v--;
-				answer += edge[2];
+		static void init(int n) {
+			parent = new int[n + 1];
+			for (int i = 0; i < n + 1; i++) {
+				parent[i] = i;
 			}
 		}
-		System.out.println(answer);
+
+		static int getParent(int c) {
+			if (parent[c] == c)
+				return c;
+			return getParent(parent[c]);
+		}
+
+		static boolean union(int a, int b) {
+			a = getParent(a);
+			b = getParent(b);
+			if (a == b)
+				return false;
+			parent[a] = b;
+			return true;
+		}
+	}
+
+	static void solve() throws Exception {
+		// MST 최소 스패닝 트리
+		//간선의 가중치의 합이 최소여야 한다.
+		// n개의 정점을 가지는 그래프에 대해 반드시 (n-1)개의 간선만을 사용해야 한다.
+		// 사이클이 포함되어서는 안된다.
+		// 사이클 여부 판단을 위해 union find
+		// 아래는 시간초과가 발생한 크루스칼 알고리즘
+		// int[][] edges = scan.nextIntMatrix(E, 3);
+		// Arrays.sort(edges, Comparator.comparingInt(a -> a[2]));
+		// int connect = 0;
+		// int idx = 0;
+		// int value = 0;
+		// while (connect < V - 1) {
+		// 	int[] edge = edges[idx++];
+		// 	if (UnionFind.union(edge[0], edge[1])) {
+		// 		connect++;
+		// 		value += edge[2];
+		// 	}
+		// }
+		// sb.append(value);
+
+		// 아래는 프림 알고리즘
+		int V = scan.nextInt();
+		int E = scan.nextInt();
+		// adjacency Matrix
+		List<int[]>[] adj = scan.newAdjacencyMatrix(V, E);
+		PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+		boolean[] visited = new boolean[V + 1];
+		int start = 1;
+		visited[start] = true;
+		pq.addAll(adj[start]);
+		int count = 0;
+		int totalWeight = 0;
+		while (count < V-1) {
+			int[] curEdge = pq.poll();
+			int curV = curEdge[0];
+			int curW = curEdge[1];
+			if(visited[curV]) continue;
+			visited[curV] = true;
+			count++;
+			totalWeight+=curW;
+			pq.addAll(adj[curV]);
+		}
+		sb.append(totalWeight);
+	}
+
+	static class LineSegment3D {
+		Point3D p1;
+		Point3D p2;
+		Vector3D v;
+
+		public LineSegment3D(Point3D p1, Point3D p2) {
+			this.p1 = p1;
+			this.p2 = p2;
+			this.v = new Vector3D(p2, p1);
+		}
+
+		public boolean isOnLineSegment(Point3D p) {
+			Vector3D v = new Vector3D(this.p1, this.p2);
+			double dx = v.x * (p.x - this.p1.x);
+			double dy = v.y * (p.y - this.p1.y);
+			double dz = v.z * (p.z - this.p1.z);
+			boolean isOnLine = dx == dy && dy == dz;
+			boolean xBetween = (p.x - p1.x) * (p2.x - p.x) > 0;
+			boolean yBetween = (p.y - p1.y) * (p2.y - p.y) > 0;
+			boolean zBetween = (p.z - p1.z) * (p2.z - p.z) > 0;
+			return isOnLine && xBetween && yBetween && zBetween;
+		}
+
+		@Override
+		public String toString() {
+			return String.format("LineSegment : (%f,%f,%f) -> (%f,%f,%f) ", p1.x, p1.y, p1.z, p2.x, p2.y, p2.z);
+		}
+	}
+
+	static class Line3D {
+		Point3D p;
+		Vector3D v;
+
+		public Line3D(Point3D p, Vector3D v) {
+			this.p = p;
+			this.v = v;
+		}
+
+		public Line3D(Point3D p1, Point3D p2) {
+			v = new Vector3D(p2, p1);
+			p = p1;
+		}
+
+		public Line3D(LineSegment3D lineSegment3D) {
+			this.v = lineSegment3D.v;
+			this.p = lineSegment3D.p1;
+		}
+
+		public boolean isOnLine(Point3D p) {
+			double dx = v.x * (p.x - this.p.x);
+			double dy = v.y * (p.y - this.p.y);
+			double dz = v.z * (p.z - this.p.z);
+			return dx == dy && dy == dz;
+		}
+
+		@Override
+		public String toString() {
+			return String.format("Line : (%f, %f, %f) + t(%f, %f, %f", p.x, p.y, p.z, v.x, v.y, v.z);
+		}
+	}
+
+	static class PlaneEquation3D {
+		double a;
+		double b;
+		double c;
+		double d;
+
+		PlaneEquation3D(PlaneNormal3D planeNormal3D) {
+			a = planeNormal3D.normalV.x;
+			b = planeNormal3D.normalV.y;
+			c = planeNormal3D.normalV.z;
+			d = -(a * planeNormal3D.p.x + b * planeNormal3D.p.y + c * planeNormal3D.p.z);
+		}
+
+		public Point3D interSect(Line3D l) {
+			double denominator = (a * l.v.x) + (b * l.v.y) + (c * l.v.z);
+			if (denominator == 0) {
+				return new Point3D(0, 0, 0);
+			}
+			double t = -(d + (a * l.p.x + b * l.p.y + c * l.p.z)) / denominator;
+			return new Point3D(t * l.v.x + l.p.x, t * l.v.y + l.p.y, t * l.v.z + l.p.z);
+		}
+
+		@Override
+		public String toString() {
+			return String.format("PlaneEquation : %fx + %fy + %fz + %f = 0", a, b, c, d);
+		}
+	}
+
+	static class PlaneNormal3D {
+		Point3D p;
+		Vector3D normalV;
+
+		public PlaneNormal3D(Point3D p, Vector3D normalV) {
+			this.p = p;
+			this.normalV = normalV;
+		}
+
+		@Override
+		public String toString() {
+			return String.format("Plane(Vector) : %f(x - %f) + %f(y - %f) + %f(z - %f) = 0", normalV.x, p.x, normalV.y,
+				p.y, normalV.z, p.z);
+		}
+	}
+
+	static class Vector3D {
+		double x;
+		double y;
+		double z;
+
+		public Vector3D(double x, double y, double z) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+
+		public Vector3D(Point3D p1, Point3D p2) {
+			this.x = p1.x - p2.x;
+			this.y = p1.y - p2.y;
+			this.z = p1.z - p2.z;
+		}
+
+		public double dot(Vector3D other) {
+			return x * other.x + y * other.y + z * other.z;
+		}
+
+		public double magnitudeSquared() {
+			return x * x + y * y + z * z;
+		}
+
+		public Vector3D multiply(double t) {
+			return new Vector3D(x * t, y * t, z * t);
+		}
+	}
+
+	static class Vector2D {
+		double x;
+		double y;
+
+		public Vector2D(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		public Vector2D(Point2D p1, Point2D p2) {
+			this.x = p1.x - p2.x;
+			this.y = p1.y - p2.y;
+		}
+
+		public double dot(Vector2D other) {
+			return x * other.x + y * other.y;
+		}
+
+		public double magnitudeSquared() {
+			return x * x + y * y;
+		}
+
+		public Vector2D multiply(double t) {
+			return new Vector2D(x * t, y * t);
+		}
+	}
+
+	static class Point3D {
+		double x;
+		double y;
+		double z;
+
+		public Point3D(double[] input) {
+			x = input[0];
+			y = input[1];
+			z = input[2];
+		}
+
+		public Point3D(double x, double y, double z) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+
+		public Point3D add(Vector3D v) {
+			return new Point3D(this.x + v.x, this.y + v.y, this.z + v.z);
+		}
+
+		public double distance(Point3D p) {
+			double distance = 0;
+			distance += (this.x - p.x) * (this.x - p.x);
+			distance += (this.y - p.y) * (this.y - p.y);
+			distance += (this.z - p.z) * (this.z - p.z);
+			return Math.sqrt(distance);
+		}
+
+		@Override
+		public String toString() {
+			return String.format("(%f, %f, %f)", x, y, z);
+		}
+	}
+
+	static class Triangle2D {
+		Point2D[] vertices;
+
+		public Triangle2D(Point2D[] vertices) {
+			this.vertices = vertices;
+		}
+
+		public double getArea() {
+			int len = vertices.length;
+			double result = 0;
+			for (int i = 0; i < len; i++) {
+				result += vertices[i].x * vertices[(i + 1) % len].y;
+			}
+			for (int i = 0; i < len; i++) {
+				result -= vertices[(i + 1) % len].x * vertices[i].y;
+			}
+			return result * 0.5;
+		}
+	}
+
+	static class Polygon2D {
+		Point2D[] vertices;
+
+		public Polygon2D(Point2D[] vertices) {
+			this.vertices = vertices;
+			Arrays.sort(this.vertices, Comparator.comparingDouble(p -> Math.atan2(p.y, p.x)));
+		}
+
+		public double getArea() {
+			int len = vertices.length;
+			double result = 0;
+			for (int i = 0; i < len; i++) {
+				result += vertices[i].x * vertices[(i + 1) % len].y;
+			}
+			for (int i = 0; i < len; i++) {
+				result -= vertices[(i + 1) % len].x * vertices[i].y;
+			}
+			return result * 0.5;
+		}
+	}
+
+	static class Point2D {
+		double x;
+		double y;
+
+		public Point2D(double[] input) {
+			x = input[0];
+			y = input[1];
+		}
+
+		public Point2D(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		public Point2D add(Vector2D v) {
+			return new Point2D(this.x + v.x, this.y + v.y);
+		}
+
+		public double distance(Point2D p) {
+			double distance = 0;
+			distance += (this.x - p.x) * (this.x - p.x);
+			distance += (this.y - p.y) * (this.y - p.y);
+			return Math.sqrt(distance);
+		}
+
+		@Override
+		public String toString() {
+			return String.format("(%f, %f)", x, y);
+		}
+	}
+
+	private static int getIntersectionArea(int[] box1, int[] box2) {
+		int intersectionW = Math.max(0, Math.min(box1[2], box2[2]) - Math.max(box1[0], box2[0]));
+		int intersectionH = Math.max(0, Math.min(box1[3], box2[3]) - Math.max(box1[1], box2[1]));
+		return (intersectionW * intersectionH);
+	}
+
+	// 기울기를 계산할 때 기울기가 무한이 되는 경우를 생각해야한다.
+	static long innerProduct(int[][] points) {
+		return (long)(points[1][0] - points[0][0]) * (points[1][1] - points[0][1])
+			+ (long)(points[2][0] - points[0][0]) * (points[2][1] - points[0][1]);
+	}
+
+	static long innerProduct(int[] point1, int[] point2, int[] point3) {
+		return (long)(point2[0] - point1[0]) * (point2[1] - point1[1]) + (long)(point3[0] - point1[0]) * (point3[1]
+			- point1[1]);
+	}
+
+	static long crossProduct(int[] point1, int[] point2, int[] point3) {
+		int dx1 = point2[0] - point1[0];
+		int dy1 = point2[1] - point1[1];
+		int dx2 = point3[0] - point1[0];
+		int dy2 = point3[1] - point1[1];
+
+		return (long)dx1 * dy2 - (long)dy1 * dx2;
+	}
+
+	static long crossProduct(int[][] points) {
+		int[] dx = new int[2];
+		int[] dy = new int[2];
+
+		for (int i = 0; i < 2; i++) {
+			dx[i] = points[i + 1][0] - points[0][0];
+			dy[i] = points[i + 1][1] - points[0][1];
+		}
+
+		return (long)dx[0] * dy[1] - (long)dy[0] * dx[1];
+	}
+
+	static double distance(int[] a, int[] b) {
+		return Math.sqrt(Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2));
+	}
+
+	static double distance(double[] a, double[] b) {
+		return Math.sqrt(Math.pow(b[0] - a[0], 2) + Math.pow(b[1] - a[1], 2));
+	}
+
+	static long distanceSquare(int[] a, int[] b) {
+		return (long)(b[0] - a[0]) * (long)(b[0] - a[0]) + (long)(b[1] - a[1]) * (long)(b[1] - a[1]);
 	}
 
 	static void print() {
 		System.out.print(sb.toString());
+	}
+
+	private static int compareDoublePoint(double[] a1, double[] a2) {
+		if (a1[0] == a2[0])
+			return Double.compare(a1[1], a2[1]);
+		return Double.compare(a1[0], a2[0]);
+	}
+
+	private static int compareIntPoint(int[] a1, int[] a2) {
+		if (a1[0] == a2[0])
+			return Integer.compare(a1[1], a2[1]);
+		return Integer.compare(a1[0], a2[0]);
 	}
 
 	static class FastReader {
@@ -109,10 +467,104 @@ public class boj_1197_최소스패닝트리 {
 			}
 			return str;
 		}
+
+		int[] nextIntArray(int n) {
+			int[] arr = new int[n];
+			for (int i = 0; i < n; i++) {
+				arr[i] = nextInt();
+			}
+			return arr;
+		}
+
+		long[] nextLongArray(int n) {
+			long[] arr = new long[n];
+			for (int i = 0; i < n; i++) {
+				arr[i] = nextLong();
+			}
+			return arr;
+		}
+
+		long[][] nextLongMatrix(int n, int m) {
+			long[][] arr = new long[n][m];
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < m; j++) {
+					arr[i][j] = nextLong();
+				}
+			}
+			return arr;
+		}
+
+		public double[] nextDoubleArray(int n) {
+			double[] arr = new double[n];
+			for (int i = 0; i < n; i++) {
+				arr[i] = nextDouble();
+			}
+			return arr;
+		}
+
+		double[][] nextDoubleMatrix(int n, int m) {
+			double[][] arr = new double[n][m];
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < m; j++) {
+					arr[i][j] = nextDouble();
+				}
+			}
+			return arr;
+		}
+
+		int[][] nextIntMatrix(int n) {
+			return nextIntMatrix(n, n);
+		}
+
+		int[][] nextIntMatrix(int n, int m) {
+			int[][] arr = new int[n][m];
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < m; j++) {
+					arr[i][j] = nextInt();
+				}
+			}
+			return arr;
+		}
+
+		char[] nextCharArrayFromString() {
+			return scan.nextLine().toCharArray();
+		}
+
+		char[][] nextCharMatrixFromString(int n) {
+			char[][] arr = new char[n][];
+			for (int i = 0; i < n; i++) {
+				arr[i] = nextCharArrayFromString();
+			}
+			return arr;
+		}
+
+		public String[] nextStringArray(int n) {
+			String[] arr = new String[n];
+			for (int i = 0; i < n; i++) {
+				arr[i] = scan.nextLine();
+			}
+			return arr;
+		}
+
+		public List<int[]>[] newAdjacencyMatrix(int V, int E) {
+			List<int[]>[] adj = new ArrayList[V + 1];
+			for (int i = 0; i < adj.length; i++) {
+				adj[i] = new ArrayList<>();
+			}
+			for (int i = 0; i < E; i++) {
+				int s = nextInt();
+				int e = nextInt();
+				int v = nextInt();
+				adj[s].add(new int[] {e, v});
+				adj[e].add(new int[] {s, v});
+			}
+			return adj;
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
+		print();
 	}
 
 	static FastReader scan = new FastReader();

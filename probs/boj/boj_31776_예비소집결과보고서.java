@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 public class boj_31776_예비소집결과보고서 {
 
-	static void input() throws Exception {
+	static void solve() throws Exception {
 		// int iter = scan.nextInt();
 		// int sincerityTeamCount = 0;
 		// for (int i = 0; i < iter; i++) {
@@ -112,7 +112,7 @@ public class boj_31776_예비소집결과보고서 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();

@@ -10,7 +10,7 @@
 
 	public class boj_30999_민주주의 {
 
-		static void input() throws Exception {
+		static void solve() throws Exception {
 			int prob = scan.nextInt();
 			int professor = scan.nextInt();
 			int exam = 0;
@@ -78,7 +78,7 @@
 		}
 
 		public static void main(String[] args) throws Exception {
-			input();
+			solve();
 		}
 
 		static FastReader scan = new FastReader();

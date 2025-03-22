@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 public class boj_29752_최장스트릭 {
 
-	static void input() throws Exception {
+	static void solve() throws Exception {
 		int N = scan.nextInt();
 		int streak = 0;
 		int maxStreak = 0;
@@ -21,7 +21,8 @@ public class boj_29752_최장스트릭 {
 				streak++;
 			maxStreak = Math.max(maxStreak, streak);
 		}
-		System.out.println(maxStreak);
+		sb.append(maxStreak);
+		print();
 	}
 
 	static void print() {
@@ -75,7 +76,7 @@ public class boj_29752_최장스트릭 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();

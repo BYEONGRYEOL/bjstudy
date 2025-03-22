@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 
 public class boj_30889_좌석배치도 {
 
-	static void input() throws Exception {
+	static void solve() throws Exception {
 		int n = scan.nextInt();
 		char[][] seats = new char[10][20];
 		for (int i = 0; i < 10; i++) {
@@ -19,11 +19,15 @@ public class boj_30889_좌석배치도 {
 		}
 		for (int i = 0; i < n; i++) {
 			String seat = scan.nextLine();
-			int row = seat.charAt(0) - 'A';
-			int col = Integer.parseInt(seat.substring(1)) - 1;
-			seats[row][col] = 'o';
+			int[] idx = toIndex(seat);
+			seats[idx[0]][idx[1]] = 'o';
 		}
 		Arrays.stream(seats).forEachOrdered(System.out::println);
+	}
+	static int[] toIndex(String seat){
+		int row = seat.charAt(0) - 'A';
+		int col = Integer.parseInt(seat.substring(1)) - 1;
+		return new int[]{row, col};
 	}
 
 	static void print() {
@@ -77,7 +81,7 @@ public class boj_30889_좌석배치도 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();

@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 public class boj_2566_최댓값 {
 
-	static void input() throws Exception {
+	static void solve() throws Exception {
 		int max = 0;
 		int maxi = 1;
 		int maxj = 1;
@@ -79,7 +79,7 @@ public class boj_2566_최댓값 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		input();
+		solve();
 	}
 
 	static FastReader scan = new FastReader();
