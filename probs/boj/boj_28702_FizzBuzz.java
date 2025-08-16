@@ -6,54 +6,34 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.StringTokenizer;
 
-public class boj_2408_큰수계산 {
+public class boj_28702_FizzBuzz {
     static void solve() throws Exception {
-		int iter = scan.nextInt();
-		Deque<BigInteger> numbers = new ArrayDeque<>();
-		Deque<Character> operators = new ArrayDeque<>();
+		String[] inputs = new String[3];
+		int latestNum = 0;
+		int latestNumIndex = 0;
+		String numRegex = "[0-9]+";
+
+		for(int i =0 ; i < 3;  i++){
+			inputs[i] = scan.nextLine();
+			if(inputs[i].matches(numRegex)){
+				latestNum = Integer.parseInt(inputs[i]);
+				latestNumIndex = i;
+			}
+		}
+		int result =latestNum + (3 - latestNumIndex);
 		
-		numbers.add(new BigInteger(scan.nextLine()));
-
-		for (int i = 0; i < (iter - 1); i++) {
-			BigInteger prev = numbers.pollLast();
-			char operator = scan.nextLine().charAt(0);
-			BigInteger next = new BigInteger(scan.nextLine());
-			if(operator == '*' || operator == '/'){
-				numbers.addLast(calculate(prev, operator, next));
-			} else{
-				numbers.addLast(prev);
-				operators.addLast(operator);
-				numbers.addLast(next);
-			}
+		if(result % 3 == 0){
+			sb.append("Fizz");
 		}
-		while(!operators.isEmpty()){
-			numbers.addFirst(calculate(numbers.pollFirst(), operators.pollFirst(), numbers.pollFirst()));
+		if(result % 5 == 0){
+			sb.append("Buzz");
 		}
-		sb.append(numbers.poll());
-	}
-	static BigInteger calculate(BigInteger a, char oper, BigInteger b){
-		switch (oper) {
-			case '+': return a.add(b);
-			case '-': return a.subtract(b);
-			case '*': return a.multiply(b);
-			case '/': {
-				BigInteger[] qr = a.divideAndRemainder(b);
-				if (!qr[1].equals(BigInteger.ZERO) && a.signum() != b.signum()) {
-					qr[0] = qr[0].subtract(BigInteger.ONE);
-				}
-				return qr[0];
-			}
-			default:
-				return BigInteger.ONE;
+		if(sb.length() == 0){
+			sb.append(result);
 		}
 	}
-
-
 	
 	static void print() {
 		System.out.print(sb.toString());

@@ -6,54 +6,31 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_2408_큰수계산 {
+public class boj_18110_solvedac {
     static void solve() throws Exception {
-		int iter = scan.nextInt();
-		Deque<BigInteger> numbers = new ArrayDeque<>();
-		Deque<Character> operators = new ArrayDeque<>();
-		
-		numbers.add(new BigInteger(scan.nextLine()));
+		int len = scan.nextInt();
+		if(len == 0){
+			sb.append(0);
+			return;
+		}
+		int[] scores = scan.nextIntArray(len);
+		Arrays.sort(scores);
+		BigDecimal percent15 = BigDecimal.valueOf(len).multiply(BigDecimal.valueOf(0.15));
+		BigDecimal Percent15Round = percent15.setScale(0, RoundingMode.HALF_UP);
+		int sum = 0;
+		for(int i = Percent15Round.intValue(); i < len- Percent15Round.intValue(); i++){
+			sum += scores[i];
+		}
+		BigDecimal roundedSum = BigDecimal.valueOf(sum).divide(BigDecimal.valueOf(len).subtract(Percent15Round.multiply(BigDecimal.valueOf(2))), MathContext.DECIMAL128).setScale(0, RoundingMode.HALF_UP);
+		sb.append(roundedSum);
 
-		for (int i = 0; i < (iter - 1); i++) {
-			BigInteger prev = numbers.pollLast();
-			char operator = scan.nextLine().charAt(0);
-			BigInteger next = new BigInteger(scan.nextLine());
-			if(operator == '*' || operator == '/'){
-				numbers.addLast(calculate(prev, operator, next));
-			} else{
-				numbers.addLast(prev);
-				operators.addLast(operator);
-				numbers.addLast(next);
-			}
-		}
-		while(!operators.isEmpty()){
-			numbers.addFirst(calculate(numbers.pollFirst(), operators.pollFirst(), numbers.pollFirst()));
-		}
-		sb.append(numbers.poll());
 	}
-	static BigInteger calculate(BigInteger a, char oper, BigInteger b){
-		switch (oper) {
-			case '+': return a.add(b);
-			case '-': return a.subtract(b);
-			case '*': return a.multiply(b);
-			case '/': {
-				BigInteger[] qr = a.divideAndRemainder(b);
-				if (!qr[1].equals(BigInteger.ZERO) && a.signum() != b.signum()) {
-					qr[0] = qr[0].subtract(BigInteger.ONE);
-				}
-				return qr[0];
-			}
-			default:
-				return BigInteger.ONE;
-		}
-	}
-
-
 	
 	static void print() {
 		System.out.print(sb.toString());
