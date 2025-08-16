@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 
 public class boj_12813_이진수연산 {
 	static int LEN = 100000;
+
 	static void solve() throws Exception {
 		String binary1 = scan.nextLine();
 		String binary2 = scan.nextLine();
@@ -21,42 +22,47 @@ public class boj_12813_이진수연산 {
 		sb.append(not(binary2)).append('\n');
 
 	}
-	static String not(String a){
+
+	static String not(String a) {
 		StringBuilder s = new StringBuilder();
 		for (int i = 0; i < LEN; i++) {
-			if(a.charAt(i) == '1')
+			if (a.charAt(i) == '1')
 				s.append('0');
-			else s.append('1');
+			else
+				s.append('1');
 		}
 		return s.toString();
 	}
-	static String xor(String a, String b){
+
+	static String xor(String a, String b) {
 		StringBuilder s = new StringBuilder();
 		for (int i = 0; i < LEN; i++) {
-			if(a.charAt(i) != b.charAt(i)){
+			if (a.charAt(i) != b.charAt(i)) {
 				s.append('1');
-			}
-			else s.append('0');
+			} else
+				s.append('0');
 		}
 		return s.toString();
 	}
-	static String or(String a, String b){
+
+	static String or(String a, String b) {
 		StringBuilder s = new StringBuilder();
 		for (int i = 0; i < LEN; i++) {
-			if(a.charAt(i) == '1' || b.charAt(i) == '1'){
+			if (a.charAt(i) == '1' || b.charAt(i) == '1') {
 				s.append('1');
-			}
-			else s.append('0');
+			} else
+				s.append('0');
 		}
 		return s.toString();
 	}
-	static String and(String a, String b){
+
+	static String and(String a, String b) {
 		StringBuilder s = new StringBuilder();
 		for (int i = 0; i < LEN; i++) {
-			if(a.charAt(i) == '1' && b.charAt(i) == '1'){
+			if (a.charAt(i) == '1' && b.charAt(i) == '1') {
 				s.append('1');
-			}
-			else s.append('0');
+			} else
+				s.append('0');
 		}
 		return s.toString();
 	}
