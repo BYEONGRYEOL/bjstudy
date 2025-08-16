@@ -6,113 +6,28 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
+import static java.util.Arrays.binarySearch;
 
-public class boj_9328_열쇠 {
-	static int[] dx = {0, 0, -1, 1};
-	static int[] dy = {-1, 1, 0, 0};
+public class boj_2751_수정렬하기2 {
 
 	static void solve() throws Exception {
-		int T = scan.nextInt();
-		for (int t = 0; t < T; t++) {
-			int H = scan.nextInt();
-			int W = scan.nextInt();
-			char[][] board = new char[H][W];
-			for (int i = 0; i < H; i++) {
-				board[i] = scan.nextCharArrayFromString();
-			}
-			String keysInput = scan.nextLine();
-			boolean[] keysAvailable = new boolean[26];
-			if (!keysInput.equals("0")) {
-				for (char c : keysInput.toCharArray()) {
-					keysAvailable[c - 'a'] = true;
-				}
-			}
-			// 갈 수 있는 곳을 파악한다.
-			boolean[][] visited = new boolean[H][W];
-			boolean[][] cango = new boolean[H][W];
-			// 갈 수 있는 곳 탐색
-			Queue<int[]> q = new LinkedList<>();
-			int docu = 0;
-			for (int i = 0; i < H; i++) {
-				for (int j = 0; j < W; j++) {
-					if(i ==0 || i == H-1 || j == 0 || j == W-1) { // 가장자리인 경우
-						if (board[i][j] != '*') { // 벽이 아닌 경우
-							q.add(new int[]{i, j});
-						}
-					}
-				}
-			}
-			while (!q.isEmpty()) {
-				int[] now = q.poll();
-				int x = now[0];
-				int y = now[1];
-				if (cango[x][y]) continue; // 이미 방문한 경우
-				cango[x][y] = true; // 갈 수 있는 곳으로 표시
-				for (int k = 0; k < 4; k++) {
-					int nx = x + dx[k];
-					int ny = y + dy[k];
-					if (nx < 0 || nx >= H || ny < 0 || ny >= W) continue; // 범위 밖인 경우
-					if (cango[nx][ny]) continue; // 이미 방문한 경우
-					if (board[nx][ny] == '*') continue; // 벽인 경우
-					q.add(new int[]{nx, ny}); // 갈 수 있는 곳으로 추가
-				}
-			}
-
-			while (true) { 
-				visited = new boolean[H][W]; // 방문 표시 초기화
-				if(q.isEmpty()){
-					for (int x = 0; x < H; x++) {
-						for (int y = 0; y < W; y++) {
-							if((x ==0 || x == H-1 || y == 0 || y == W-1) && !(board[x][y] == '*' || (board[x][y] >='A' && board[x][y] <='Z'))) { // 가장자리인 경우
-								q.add(new int []{x, y}); 
-							}
-						} 
-					}
-				}
-				while(!q.isEmpty()){
-					int[] now = q.poll();
-					int x = now[0];
-					int y = now[1];
-					if(cango[x][y] && !visited[x][y]) { // 갈 수 있는 곳이면서 방문하지 않은 경우
-						visited[x][y] = true; // 방문 표시
-						if(board[x][y] >= 'a' && board[x][y] <='z') { // 열쇠가 있는 경우
-							keysAvailable[board[x][y] - 'a'] = true; // 키를 획득
-							board[x][y] = '.'; // 열쇠를 획득했으므로 제거
-						} else if(board[x][y] == '$') { 
-							board[x][y] = '.'; // 문서인 경우
-							docu++;
-						}
-					} else{
-						continue;
-					}
-					for(int k = 0; k < 4; k++) {
-						int nx = x + dx[k];
-						int ny = y + dy[k];
-						if (nx < 0 || nx >= H || ny < 0 || ny >= W) continue; // 범위 밖인 경우
-						if (cango[nx][ny] && !visited[nx][ny] && !(board[nx][ny] >='A' && board[nx][ny] <='Z')) { // 갈 수 있는 곳이면서 방문하지 않은 경우
-							q.add(new int[]{nx, ny}); // 갈 수 있는 곳으로 추가
-						}
-					}
-				}
-				List<int[]> unlocked = unlockDoor(board, keysAvailable);
-				if(unlocked.isEmpty()) break; // 더 이상 열 수 있는 문이 없는 경우
-				// printBoard(board);
-			}	
-			sb.append(docu).append("\n");
+		int n = scan.nextInt();
+		int[] arr = scan.nextIntArray(n);
+		Arrays.sort(arr);
+		for (int i = 0; i < n; i++) {
+			sb.append(arr[i]).append("\n");
 		}
 	}
-	private static void printBoard(char[][] board) {
-		for (char[] row : board) {
-			sb.append(new String(row)).append("\n");
+1
+
+
+	private static void printBoard(int[][] board) {
+		for (int[] row : board) {
+			for (int cell : row) {
+				sb.append(cell).append(" ");
+			}
+			sb.append("\n");
 		}
 		sb.append("\n");
 		
