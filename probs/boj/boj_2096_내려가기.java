@@ -8,70 +8,32 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_5639_이진검색트리 {
-	
-	static void solve() throws Exception {
-		String input = "";
-		while ((input = scan.nextLine()) != null) { 
-			Tree.addNode(Integer.parseInt(input));
-		}
-		Tree.postOrder(Tree.root);
-	}
-	
-	static class Node{
-		int num;
-		Node left;
-		Node right;
-		
-		public Node(int num){
-			this.num = num;
-		}
-		public Node getChild(int lr){
-			if(lr==0){
-				return left;
-			} else{
-				return right;
-			}
-		}
-		public Node addChild(int num){
-			if(num < this.num){
-				if(left == null){
-					left = new Node(num);
-					return left;
-				}
-				return left.addChild(num);
-			} else{
-				if(right == null){
-					right = new Node(num);
-					return right;
-				}
-				return right.addChild(num);
-			}
-		}
-	}
+public class boj_2096_내려가기 {
 
-	static class Tree{
-		static Node root;
-		static void postOrder(Node node){
-			Node next = node.left;
-			if(next != null){
-				postOrder(next);
-			}
-			next = node.right;
-			if(next != null){
-				postOrder(next);
-			}
-			sb.append(node.num).append('\n');
+    static void solve() throws Exception {
+		int n = scan.nextInt();
+		long[][] arr = scan.nextLongMatrix(n, 3);
+		long[][] dpMax = new long[n][3];
+		long[][] dpMin = new long[n][3];
+		// dpMax[i][j] : i번째 줄 j번째 칸까지 내려왔을 때의 최대 점수
+		// dpMin[i][j] : i번째 줄 j번째 칸까지 내려왔을 때의 최소 점수
+		// 각각 열로 내려가는 최대점수를 모두 구한다 : 2열은 0열은 제외하고 계산한다
+		for (int j = 0; j < 3; j++) {
+			dpMax[0][j] = arr[0][j];
+			dpMin[0][j] = arr[0][j];
 		}
-		static void addNode(int n){
-			if(root == null){
-				Node node = new Node(n);
-				root = node;
-			} else{
-				root.addChild(n);
-			}
+		for(int i = 1; i < n ; i++){
+			dpMax[i][0] = Math.max(dpMax[i-1][0], dpMax[i-1][1]) + arr[i][0];
+			dpMax[i][1] = Math.max(Math.max(dpMax[i-1][0], dpMax[i-1][1]), dpMax[i-1][2]) + arr[i][1];
+			dpMax[i][2] = Math.max(dpMax[i-1][1], dpMax[i-1][2]) + arr[i][2];
+			dpMin[i][0] = Math.min(dpMin[i-1][0], dpMin[i-1][1]) + arr[i][0];
+			dpMin[i][1] = Math.min(Math.min(dpMin[i-1][0], dpMin[i-1][1]), dpMin[i-1][2]) + arr[i][1];
+			dpMin[i][2] = Math.min(dpMin[i-1][1], dpMin[i-1][2]) + arr[i][2];
 		}
-	}
+		long max = Math.max(Math.max(dpMax[n-1][0], dpMax[n-1][1]), dpMax[n-1][2]);
+		long min = Math.min(Math.min(dpMin[n-1][0], dpMin[n-1][1]), dpMin[n-1][2]);
+		sb.append(max).append(' ').append(min);
+	}	
 
 	static void print() {
 		System.out.print(sb.toString());

@@ -6,71 +6,47 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class boj_5639_이진검색트리 {
-	
+public class boj_14938_서강그라운드 {
 	static void solve() throws Exception {
-		String input = "";
-		while ((input = scan.nextLine()) != null) { 
-			Tree.addNode(Integer.parseInt(input));
-		}
-		Tree.postOrder(Tree.root);
-	}
-	
-	static class Node{
-		int num;
-		Node left;
-		Node right;
+		// 지역마다 아이템 몇개인지는 안다.
+		// 1 to N(전체) 로 탐색해야하므로, 크루스칼 월리스 탐색
 		
-		public Node(int num){
-			this.num = num;
+		int n = scan.nextInt();
+		int canGoDistance = scan.nextInt();
+		int r = scan.nextInt();
+		int[] rewardCount = scan.nextIntArray(n);
+		int[][] board = new int[n+1][n+1];
+		for(int i = 0 ; i < n+1; i++){
+			Arrays.fill(board[i], Integer.MAX_VALUE /2);
+			board[i][i] = 0;
 		}
-		public Node getChild(int lr){
-			if(lr==0){
-				return left;
-			} else{
-				return right;
-			}
+		
+		for(int i  = 0 ; i < r ; i ++){
+			int s = scan.nextInt();
+			int e = scan.nextInt();
+			int dist = scan.nextInt();
+			board[s][e] = dist;
+			board[e][s] = dist;
 		}
-		public Node addChild(int num){
-			if(num < this.num){
-				if(left == null){
-					left = new Node(num);
-					return left;
-				}
-				return left.addChild(num);
-			} else{
-				if(right == null){
-					right = new Node(num);
-					return right;
-				}
-				return right.addChild(num);
-			}
-		}
-	}
+		
+		for(int k = 1 ; k <=n ; k++)
+			for(int i = 1 ; i <=n; i++)
+				for(int j = 1 ; j <= n ; j++)
+					board[i][j] = Math.min(board[i][k] + board[k][j], board[i][j]);
 
-	static class Tree{
-		static Node root;
-		static void postOrder(Node node){
-			Node next = node.left;
-			if(next != null){
-				postOrder(next);
-			}
-			next = node.right;
-			if(next != null){
-				postOrder(next);
-			}
-			sb.append(node.num).append('\n');
+		int maxReward = 0;
+		int curReward = 0;
+		for(int i = 1 ; i <=n; i++){
+			curReward = 0;
+			for(int j = 1; j <=n ; j ++)
+				if(board[i][j] <= canGoDistance)
+					curReward += rewardCount[j-1];
+			maxReward = Math.max(maxReward, curReward);
 		}
-		static void addNode(int n){
-			if(root == null){
-				Node node = new Node(n);
-				root = node;
-			} else{
-				root.addChild(n);
-			}
-		}
+		sb.append(maxReward);
 	}
 
 	static void print() {

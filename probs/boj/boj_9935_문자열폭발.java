@@ -6,71 +6,50 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class boj_5639_이진검색트리 {
-	
+public class boj_9935_문자열폭발 {
+	static char[] input;
+	static String boom;
 	static void solve() throws Exception {
-		String input = "";
-		while ((input = scan.nextLine()) != null) { 
-			Tree.addNode(Integer.parseInt(input));
-		}
-		Tree.postOrder(Tree.root);
-	}
-	
-	static class Node{
-		int num;
-		Node left;
-		Node right;
-		
-		public Node(int num){
-			this.num = num;
-		}
-		public Node getChild(int lr){
-			if(lr==0){
-				return left;
-			} else{
-				return right;
-			}
-		}
-		public Node addChild(int num){
-			if(num < this.num){
-				if(left == null){
-					left = new Node(num);
-					return left;
-				}
-				return left.addChild(num);
-			} else{
-				if(right == null){
-					right = new Node(num);
-					return right;
-				}
-				return right.addChild(num);
-			}
-		}
-	}
+        String input = scan.nextLine();
+        String boom = scan.nextLine();
+        int boomLength = boom.length();
 
-	static class Tree{
-		static Node root;
-		static void postOrder(Node node){
-			Node next = node.left;
-			if(next != null){
-				postOrder(next);
-			}
-			next = node.right;
-			if(next != null){
-				postOrder(next);
-			}
-			sb.append(node.num).append('\n');
-		}
-		static void addNode(int n){
-			if(root == null){
-				Node node = new Node(n);
-				root = node;
-			} else{
-				root.addChild(n);
-			}
-		}
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+
+            if (stack.size() >= boomLength) {
+                boolean isBoom = true;
+
+                for (int j = 0; j < boomLength; j++) {
+                    if (stack.get(stack.size() - boomLength + j) != boom.charAt(j)) {
+                        isBoom = false;
+                        break;
+                    }
+                }
+
+                if (isBoom) {
+                    for (int j = 0; j < boomLength; j++) {
+                        stack.pop();
+                    }
+                }
+            }
+        }
+
+        // 결과 출력
+        if (stack.isEmpty()) {
+            System.out.println("FRULA");
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (char c : stack) {
+                sb.append(c);
+            }
+            System.out.println(sb.toString());
+        }
 	}
 
 	static void print() {

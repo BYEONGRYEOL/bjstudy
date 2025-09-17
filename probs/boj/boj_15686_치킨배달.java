@@ -6,71 +6,57 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class boj_5639_이진검색트리 {
+public class boj_15686_치킨배달 {
 	
-	static void solve() throws Exception {
-		String input = "";
-		while ((input = scan.nextLine()) != null) { 
-			Tree.addNode(Integer.parseInt(input));
-		}
-		Tree.postOrder(Tree.root);
-	}
-	
-	static class Node{
-		int num;
-		Node left;
-		Node right;
-		
-		public Node(int num){
-			this.num = num;
-		}
-		public Node getChild(int lr){
-			if(lr==0){
-				return left;
-			} else{
-				return right;
+	static int answer = Integer.MAX_VALUE;
+	static ArrayList<int[]> chicken;
+	static int[] realChickens;
+	static ArrayList<int[]> house;
+    static void solve() throws Exception {
+		int n = scan.nextInt();
+		int m = scan.nextInt();
+		realChickens = new int[m];
+		int[][] board = scan.nextIntMatrix(n);
+		chicken = new ArrayList<>();
+		house = new ArrayList<>();
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if(board[i][j] == 1) house.add(new int[] {i,j});
+				else if(board[i][j] == 2) chicken.add(new int[] {i,j});
 			}
 		}
-		public Node addChild(int num){
-			if(num < this.num){
-				if(left == null){
-					left = new Node(num);
-					return left;
-				}
-				return left.addChild(num);
-			} else{
-				if(right == null){
-					right = new Node(num);
-					return right;
-				}
-				return right.addChild(num);
+		int[][] dist = new int[house.size()][chicken.size()];
+		for (int i = 0; i < house.size(); i++) {
+			for (int j = 0; j < chicken.size(); j++) {
+				dist[i][j] = Math.abs(house.get(i)[0] - chicken.get(j)[0]) + Math.abs(house.get(i)[1] - chicken.get(j)[1]);
 			}
 		}
-	}
 
-	static class Tree{
-		static Node root;
-		static void postOrder(Node node){
-			Node next = node.left;
-			if(next != null){
-				postOrder(next);
+		dfs(dist, 0,0);
+		sb.append(answer);
+	}	
+	static void dfs(int[][] dist, int depth, int num){
+		if(depth == realChickens.length){
+			int sum = 0;
+			for(int i = 0; i < house.size(); i++){
+				int min = Integer.MAX_VALUE;
+				for(int j = 0; j <realChickens.length; j++){
+					min = Math.min(min,dist[i][realChickens[j]]);
+				}
+				sum+=min;
 			}
-			next = node.right;
-			if(next != null){
-				postOrder(next);
-			}
-			sb.append(node.num).append('\n');
+			answer = Math.min(sum,answer);
+			return;
 		}
-		static void addNode(int n){
-			if(root == null){
-				Node node = new Node(n);
-				root = node;
-			} else{
-				root.addChild(n);
-			}
+		
+		for(int i = num; i < chicken.size(); i++){
+			realChickens[depth] = i;
+			dfs(dist, depth+1, i+1);
 		}
+		
 	}
 
 	static void print() {

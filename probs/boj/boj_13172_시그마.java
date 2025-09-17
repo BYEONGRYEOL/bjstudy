@@ -8,70 +8,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_5639_이진검색트리 {
-	
+public class boj_13172_시그마 {
 	static void solve() throws Exception {
-		String input = "";
-		while ((input = scan.nextLine()) != null) { 
-			Tree.addNode(Integer.parseInt(input));
-		}
-		Tree.postOrder(Tree.root);
-	}
-	
-	static class Node{
-		int num;
-		Node left;
-		Node right;
-		
-		public Node(int num){
-			this.num = num;
-		}
-		public Node getChild(int lr){
-			if(lr==0){
-				return left;
-			} else{
-				return right;
-			}
-		}
-		public Node addChild(int num){
-			if(num < this.num){
-				if(left == null){
-					left = new Node(num);
-					return left;
-				}
-				return left.addChild(num);
-			} else{
-				if(right == null){
-					right = new Node(num);
-					return right;
-				}
-				return right.addChild(num);
-			}
+		// 3 7
+		// 3 * x = 1000000007 + 7
+		// 3 * x = 1000000014
+		// x = 1000000014 / 3
+		int n =  scan.nextInt();
+		long sum = 0;
+		for(int i  = 0; i < n ; i++){
+			sum 
 		}
 	}
 
-	static class Tree{
-		static Node root;
-		static void postOrder(Node node){
-			Node next = node.left;
-			if(next != null){
-				postOrder(next);
-			}
-			next = node.right;
-			if(next != null){
-				postOrder(next);
-			}
-			sb.append(node.num).append('\n');
-		}
-		static void addNode(int n){
-			if(root == null){
-				Node node = new Node(n);
-				root = node;
-			} else{
-				root.addChild(n);
-			}
-		}
+	static int GCD(int a, int b){
+		return a%b == 0 ? b : GCD(b,a);
 	}
+	
+
+	
 
 	static void print() {
 		System.out.print(sb.toString());

@@ -6,72 +6,48 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class boj_5639_이진검색트리 {
-	
-	static void solve() throws Exception {
-		String input = "";
-		while ((input = scan.nextLine()) != null) { 
-			Tree.addNode(Integer.parseInt(input));
-		}
-		Tree.postOrder(Tree.root);
-	}
-	
-	static class Node{
-		int num;
-		Node left;
-		Node right;
-		
-		public Node(int num){
-			this.num = num;
-		}
-		public Node getChild(int lr){
-			if(lr==0){
-				return left;
-			} else{
-				return right;
-			}
-		}
-		public Node addChild(int num){
-			if(num < this.num){
-				if(left == null){
-					left = new Node(num);
-					return left;
-				}
-				return left.addChild(num);
-			} else{
-				if(right == null){
-					right = new Node(num);
-					return right;
-				}
-				return right.addChild(num);
-			}
-		}
-	}
+public class boj_1916_최소비용구하기 {
 
-	static class Tree{
-		static Node root;
-		static void postOrder(Node node){
-			Node next = node.left;
-			if(next != null){
-				postOrder(next);
-			}
-			next = node.right;
-			if(next != null){
-				postOrder(next);
-			}
-			sb.append(node.num).append('\n');
+    static void solve() throws Exception {
+		int n = scan.nextInt();
+		int m = scan.nextInt();
+		ArrayList<int[]>[] graph = new ArrayList[n+1];
+		for (int i = 1; i <= n; i++) {
+			graph[i] = new ArrayList<>();
 		}
-		static void addNode(int n){
-			if(root == null){
-				Node node = new Node(n);
-				root = node;
-			} else{
-				root.addChild(n);
+		for(int i = 0 ; i < m ; i++){
+			int start = scan.nextInt();
+			int end = scan.nextInt();
+			int cost = scan.nextInt();
+			graph[start].add(new int[]{end, cost});
+		}
+		int start = scan.nextInt();
+		int end = scan.nextInt();
+		PriorityQueue<long[]> pq = new PriorityQueue<>((o1, o2) -> Long.compare(o1[1], o2[1]));
+		pq.add(new long[]{start, 0});
+		long[] dist = new long[n+1];
+		Arrays.fill(dist, Long.MAX_VALUE);
+		dist[start] = 0;
+		while(!pq.isEmpty()){
+			long[] cur = pq.poll();
+			if(cur[0] == end){
+				sb.append(cur[1]);
+				return;
+			}
+			for(int[] next : graph[(int)cur[0]]){
+				if(dist[(int)next[0]] > cur[1] + next[1]){
+					dist[(int)next[0]] = cur[1] + next[1];
+					pq.add(new long[]{next[0], dist[(int)next[0]]});
+				}
 			}
 		}
-	}
+		
+	}	
 
 	static void print() {
 		System.out.print(sb.toString());

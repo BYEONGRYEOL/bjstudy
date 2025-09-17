@@ -6,69 +6,40 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Set;
 import java.util.StringTokenizer;
 
-public class boj_5639_이진검색트리 {
-	
-	static void solve() throws Exception {
-		String input = "";
-		while ((input = scan.nextLine()) != null) { 
-			Tree.addNode(Integer.parseInt(input));
-		}
-		Tree.postOrder(Tree.root);
-	}
-	
-	static class Node{
-		int num;
-		Node left;
-		Node right;
-		
-		public Node(int num){
-			this.num = num;
-		}
-		public Node getChild(int lr){
-			if(lr==0){
-				return left;
-			} else{
-				return right;
-			}
-		}
-		public Node addChild(int num){
-			if(num < this.num){
-				if(left == null){
-					left = new Node(num);
-					return left;
-				}
-				return left.addChild(num);
-			} else{
-				if(right == null){
-					right = new Node(num);
-					return right;
-				}
-				return right.addChild(num);
-			}
-		}
-	}
+public class boj_15666_N과M12 {
 
-	static class Tree{
-		static Node root;
-		static void postOrder(Node node){
-			Node next = node.left;
-			if(next != null){
-				postOrder(next);
-			}
-			next = node.right;
-			if(next != null){
-				postOrder(next);
-			}
-			sb.append(node.num).append('\n');
+	static int[] result;
+	static int[] arr;
+	static int n;
+	static int m;
+    static void solve() throws Exception {
+		n = scan.nextInt();
+		m = scan.nextInt();
+		Set<Integer> set = new java.util.HashSet<>();
+		for(int i = 0 ; i < n; i++){
+			set.add(scan.nextInt());
 		}
-		static void addNode(int n){
-			if(root == null){
-				Node node = new Node(n);
-				root = node;
-			} else{
-				root.addChild(n);
+		arr = set.stream().sorted().mapToInt(Integer::intValue).toArray();
+		n = arr.length;
+		result = new int[m];
+		mutualPermutation(0, 1);
+	}	
+
+	static void mutualPermutation(int index, int num){
+		if(index == m){
+			for(int i = 0 ; i < m; i++){
+				sb.append(result[i]).append(' ');
+			}
+			sb.append('\n');
+			return;
+		}
+		for(int i = 0; i <n; i++){
+			if(arr[i] >= result[index==0?0:index-1]){
+				result[index] = arr[i];
+				mutualPermutation(index+1, i);
 			}
 		}
 	}

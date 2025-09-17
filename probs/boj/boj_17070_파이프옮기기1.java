@@ -8,70 +8,53 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class boj_5639_이진검색트리 {
+public class boj_17070_파이프옮기기1 {
 	
+    static int[][] board;
+	static int GARO = 0;
+	static int SERO = 1;
+	static int DAGAK = 2;
+	static int n;
+	static int route = 0;
 	static void solve() throws Exception {
-		String input = "";
-		while ((input = scan.nextLine()) != null) { 
-			Tree.addNode(Integer.parseInt(input));
-		}
-		Tree.postOrder(Tree.root);
+		n = scan.nextInt();
+		board = scan.nextIntMatrix(n);
+		// {가장마지막 위치, 파이스상태{0,1,2}}
+		// 0 가로
+		// 1 세로
+		// 2 대각선
+		dfs(0,1, GARO);
+		sb.append(route);
 	}
-	
-	static class Node{
-		int num;
-		Node left;
-		Node right;
-		
-		public Node(int num){
-			this.num = num;
+
+	static void dfs(int x, int y, int status){
+		if(x == n-1 && y == n-1){
+			route ++;
+			return;
 		}
-		public Node getChild(int lr){
-			if(lr==0){
-				return left;
-			} else{
-				return right;
-			}
+		if(status == GARO){
+			if(y + 1 < n && board[x][y+1] == 0)
+				dfs(x, y+1, GARO);
+			if(x+1 < n && y + 1 < n && board[x][y+1] == 0 && board[x+1][y] == 0 && board[x+1][y+1] == 0)
+				dfs(x+1,y+1,DAGAK);
 		}
-		public Node addChild(int num){
-			if(num < this.num){
-				if(left == null){
-					left = new Node(num);
-					return left;
-				}
-				return left.addChild(num);
-			} else{
-				if(right == null){
-					right = new Node(num);
-					return right;
-				}
-				return right.addChild(num);
-			}
+		else if(status == SERO){
+			if(x + 1 < n &&board[x+1][y] == 0)
+				dfs(x+1, y, SERO);
+			if(x+1 < n && y + 1 < n && board[x][y+1] == 0 && board[x+1][y] == 0 && board[x+1][y+1] == 0)
+				dfs(x+1,y+1,DAGAK);
+		}
+		else if(status == DAGAK){
+			if(x + 1 < n &&board[x+1][y] == 0)
+				dfs(x+1, y, SERO);
+			if(y + 1 < n &&board[x][y+1] == 0)
+				dfs(x, y+1, GARO);
+			if(x+1 < n && y + 1 < n && board[x][y+1] == 0 && board[x+1][y] == 0 && board[x+1][y+1] == 0)
+				dfs(x+1,y+1,DAGAK);
 		}
 	}
 
-	static class Tree{
-		static Node root;
-		static void postOrder(Node node){
-			Node next = node.left;
-			if(next != null){
-				postOrder(next);
-			}
-			next = node.right;
-			if(next != null){
-				postOrder(next);
-			}
-			sb.append(node.num).append('\n');
-		}
-		static void addNode(int n){
-			if(root == null){
-				Node node = new Node(n);
-				root = node;
-			} else{
-				root.addChild(n);
-			}
-		}
-	}
+	
 
 	static void print() {
 		System.out.print(sb.toString());
